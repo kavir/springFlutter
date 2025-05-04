@@ -26,6 +26,8 @@ class ApiConfig {
   static String prodOriginLocalServerUrl = 'http://localhost:3000';
   ////////////////////////////////////////////////////////////////////////
   static const String apiUrl = "/api";
+  static const String meter = "/meter";
+  static const String bills = "/bills";
   static const String transaction = "/transactions";
   static const String wallet = "/wallet";
   static const String qr = "/qr";

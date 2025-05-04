@@ -6,6 +6,7 @@ import 'package:spring_roll_flutter/Utils/toast_utils.dart';
 import 'package:spring_roll_flutter/Wallet/Provider/fund_transfer_provider.dart';
 import 'package:spring_roll_flutter/Wallet/Provider/indv_user_dashBoard_info_provider.dart';
 import 'package:spring_roll_flutter/Wallet/Provider/web_socket_provider.dart';
+import 'package:spring_roll_flutter/Wallet/Screen/ElectricityScreen.dart';
 import 'package:spring_roll_flutter/Wallet/Screen/fun_transfer_screen.dart';
 import 'package:spring_roll_flutter/Wallet/Screen/qr_screen.dart';
 import 'package:spring_roll_flutter/Wallet/Screen/transaction_history_screen.dart';
@@ -222,6 +223,16 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => TransferForm()),
+              );
+            },
+          ),
+          _buildOptionCard(
+            Icons.send_and_archive,
+            'Electricity Bill',
+            () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ElectricityBillScreen(userId: id,)),
               );
             },
           ),
