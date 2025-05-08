@@ -23,12 +23,10 @@ class TransactionHistoryProviderNotifier
     state = const AppState.loading(loading: true);
     final dio = ref.read(dioProvider);
     final url = '${ApiConfig.apiUrl}${ApiConfig.transaction}/$id';
-    print("yesko url chai___$url:::$selectedFilter");
     try {
       final String? token = await ref.read(tokenProvider);
       final String cleanedToken =
           token?.replaceAll(RegExp(r'token:|[{}]'), '')?.trim() ?? '';
-      print("yaha samma pugyo");
 
       final param = {
         "duration": selectedFilter,
@@ -46,11 +44,9 @@ class TransactionHistoryProviderNotifier
         ),
       );
       if (response.statusCode == 200) {
-        print("the response isjhasv ___$response");
         final jsonData = response.data;
         final List<TransactionModel> transactions = List<TransactionModel>.from(
             jsonData.map((json) => TransactionModel.fromJson(json)));
-        print("the transactional history is ___$transactions");
         state = AppState.success(data: transactions);
       } else {
         state = AppState.error();

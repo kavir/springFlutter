@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:spring_roll_flutter/Authentication/Provider/loginProvider.dart';
 import 'package:spring_roll_flutter/Authentication/Screen/registerScreen.dart';
+import 'package:spring_roll_flutter/BottomNavigation/bottomNavigation.dart';
+import 'package:spring_roll_flutter/Utils/loadingIndicator.dart';
 import 'package:spring_roll_flutter/Utils/toast_utils.dart';
-import 'package:spring_roll_flutter/Wallet/Screen/wallet_home_screen.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -23,12 +24,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     ref.listen(loginProvider, (prev, next) {
       next.maybeWhen(
         orElse: () {},
+        loading: (loading) {
+          if (loading!) {
+            CustomLoadingIndicator().show(context);
+          } else {
+            CustomLoadingIndicator().hide();
+          }
+        },
         success: (data) {
-          ToastUtils().showSuccessToast(context, "Logged In successfully");
-          Navigator.push(
+          ToastUtils().showSuccessToast(context, "Login Successful");
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => WalletHomePage(),
+              builder: (context) => NavigationMenu(),
             ),
           );
         },
@@ -39,10 +47,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     });
 
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text("Login", style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: const Color(0xFFB04E6D),
         centerTitle: true,
       ),
       body: Center(
@@ -50,7 +58,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: const Color.fromARGB(255, 66, 66, 66),
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
@@ -74,18 +82,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blueAccent,
+                        color: Colors.white,
                       ),
                     ),
                     SizedBox(height: 20),
                     TextFormField(
                       controller: _numberController,
+                      style: const TextStyle(color: Colors.white),
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
                         labelText: 'Phone Number',
+                        labelStyle: TextStyle(color: Colors.white),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.blueAccent),
+                          borderSide: BorderSide(color: Colors.white),
                         ),
                         contentPadding:
                             EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -100,11 +110,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     SizedBox(height: 16),
                     TextFormField(
                       controller: _passwordController,
+                      style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         labelText: 'Password',
+                        labelStyle: TextStyle(color: Colors.white),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.blueAccent),
+                          borderSide: BorderSide(color: Colors.white),
                         ),
                         contentPadding:
                             EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -133,19 +145,23 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ElevatedButton(
                       onPressed: _submitForm,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueAccent,
+                        backgroundColor: const Color(0xFFB04E6D),
                         padding: EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: Text('Login', style: TextStyle(fontSize: 16)),
+                      child: Text('Login',
+                          style: TextStyle(fontSize: 16, color: Colors.white)),
                     ),
                     SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Don't have an account?"),
+                        Text(
+                          "Don't have an account?",
+                          style: TextStyle(color: Colors.white),
+                        ),
                         TextButton(
                           onPressed: () {
                             // Navigate to the registration screen
@@ -159,7 +175,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           },
                           child: Text(
                             'Register',
-                            style: TextStyle(color: Colors.blueAccent),
+                            style: TextStyle(color: Colors.blue),
                           ),
                         ),
                       ],

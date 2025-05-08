@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spring_roll_flutter/Utils/constants/colors.dart';
 
 class ToastUtils {
   static final ToastUtils _instance = ToastUtils._internal();
@@ -65,7 +66,7 @@ class ToastUtils {
       _buildCustomToast(
         message: message,
         icon: Icons.error,
-        backgroundColor: Colors.red,
+        backgroundColor: AppColors.error,
         iconColor: Colors.white,
       ),
     );

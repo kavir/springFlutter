@@ -24,6 +24,7 @@ mixin _$RegisterRequestModel {
   dynamic get firstname => throw _privateConstructorUsedError;
   dynamic get lastname => throw _privateConstructorUsedError;
   dynamic get number => throw _privateConstructorUsedError;
+  dynamic get mpin => throw _privateConstructorUsedError;
   dynamic get password => throw _privateConstructorUsedError;
   dynamic get role => throw _privateConstructorUsedError;
 
@@ -48,6 +49,7 @@ abstract class $RegisterRequestModelCopyWith<$Res> {
       dynamic firstname,
       dynamic lastname,
       dynamic number,
+      dynamic mpin,
       dynamic password,
       dynamic role});
 }
@@ -72,6 +74,7 @@ class _$RegisterRequestModelCopyWithImpl<$Res,
     Object? firstname = freezed,
     Object? lastname = freezed,
     Object? number = freezed,
+    Object? mpin = freezed,
     Object? password = freezed,
     Object? role = freezed,
   }) {
@@ -91,6 +94,10 @@ class _$RegisterRequestModelCopyWithImpl<$Res,
       number: freezed == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      mpin: freezed == mpin
+          ? _value.mpin
+          : mpin // ignore: cast_nullable_to_non_nullable
               as dynamic,
       password: freezed == password
           ? _value.password
@@ -117,6 +124,7 @@ abstract class _$$RegisterRequestModelImplCopyWith<$Res>
       dynamic firstname,
       dynamic lastname,
       dynamic number,
+      dynamic mpin,
       dynamic password,
       dynamic role});
 }
@@ -138,6 +146,7 @@ class __$$RegisterRequestModelImplCopyWithImpl<$Res>
     Object? firstname = freezed,
     Object? lastname = freezed,
     Object? number = freezed,
+    Object? mpin = freezed,
     Object? password = freezed,
     Object? role = freezed,
   }) {
@@ -157,6 +166,10 @@ class __$$RegisterRequestModelImplCopyWithImpl<$Res>
       number: freezed == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      mpin: freezed == mpin
+          ? _value.mpin
+          : mpin // ignore: cast_nullable_to_non_nullable
               as dynamic,
       password: freezed == password
           ? _value.password
@@ -178,6 +191,7 @@ class _$RegisterRequestModelImpl implements _RegisterRequestModel {
       this.firstname,
       this.lastname,
       this.number,
+      this.mpin,
       this.password,
       this.role});
 
@@ -193,13 +207,15 @@ class _$RegisterRequestModelImpl implements _RegisterRequestModel {
   @override
   final dynamic number;
   @override
+  final dynamic mpin;
+  @override
   final dynamic password;
   @override
   final dynamic role;
 
   @override
   String toString() {
-    return 'RegisterRequestModel(username: $username, firstname: $firstname, lastname: $lastname, number: $number, password: $password, role: $role)';
+    return 'RegisterRequestModel(username: $username, firstname: $firstname, lastname: $lastname, number: $number, mpin: $mpin, password: $password, role: $role)';
   }
 
   @override
@@ -211,6 +227,7 @@ class _$RegisterRequestModelImpl implements _RegisterRequestModel {
             const DeepCollectionEquality().equals(other.firstname, firstname) &&
             const DeepCollectionEquality().equals(other.lastname, lastname) &&
             const DeepCollectionEquality().equals(other.number, number) &&
+            const DeepCollectionEquality().equals(other.mpin, mpin) &&
             const DeepCollectionEquality().equals(other.password, password) &&
             const DeepCollectionEquality().equals(other.role, role));
   }
@@ -223,6 +240,7 @@ class _$RegisterRequestModelImpl implements _RegisterRequestModel {
       const DeepCollectionEquality().hash(firstname),
       const DeepCollectionEquality().hash(lastname),
       const DeepCollectionEquality().hash(number),
+      const DeepCollectionEquality().hash(mpin),
       const DeepCollectionEquality().hash(password),
       const DeepCollectionEquality().hash(role));
 
@@ -250,6 +268,7 @@ abstract class _RegisterRequestModel implements RegisterRequestModel {
       final dynamic firstname,
       final dynamic lastname,
       final dynamic number,
+      final dynamic mpin,
       final dynamic password,
       final dynamic role}) = _$RegisterRequestModelImpl;
 
@@ -264,6 +283,8 @@ abstract class _RegisterRequestModel implements RegisterRequestModel {
   dynamic get lastname;
   @override
   dynamic get number;
+  @override
+  dynamic get mpin;
   @override
   dynamic get password;
   @override

@@ -13,6 +13,7 @@ _$RegisterRequestModelImpl _$$RegisterRequestModelImplFromJson(
       firstname: json['firstname'],
       lastname: json['lastname'],
       number: json['number'],
+      mpin: json['mpin'],
       password: json['password'],
       role: json['role'],
     );
@@ -24,6 +25,7 @@ Map<String, dynamic> _$$RegisterRequestModelImplToJson(
       'firstname': instance.firstname,
       'lastname': instance.lastname,
       'number': instance.number,
+      'mpin': instance.mpin,
       'password': instance.password,
       'role': instance.role,
     };

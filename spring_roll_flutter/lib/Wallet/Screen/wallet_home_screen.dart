@@ -10,6 +10,7 @@ import 'package:spring_roll_flutter/Wallet/Screen/ElectricityScreen.dart';
 import 'package:spring_roll_flutter/Wallet/Screen/fun_transfer_screen.dart';
 import 'package:spring_roll_flutter/Wallet/Screen/qr_screen.dart';
 import 'package:spring_roll_flutter/Wallet/Screen/transaction_history_screen.dart';
+import 'package:intl/intl.dart';
 
 class WalletHomePage extends ConsumerStatefulWidget {
   WalletHomePage({
@@ -30,9 +31,9 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(indvDahsboardInfoProvider.notifier).indvInfoProvider();
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   ref.read(indvDahsboardInfoProvider.notifier).indvInfoProvider();
+    // });
   }
 
   @override
@@ -81,7 +82,7 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
           children: [
             CircleAvatar(
               radius: 25,
-              backgroundColor: Color(0xFFB04E6D),
+              backgroundColor: Color.fromARGB(255, 176, 78, 109),
               child: Icon(Icons.account_circle, size: 35, color: Colors.white),
             ),
             Column(
@@ -138,7 +139,9 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
           Row(
             children: [
               Text(
-                _isBalanceVisible ? 'NPR $amount' : 'NPR XXXX.XX',
+                _isBalanceVisible
+                    ? 'NPR ${annotatedAmount(amount)}'
+                    : 'NPR XXXX.XX',
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
@@ -172,7 +175,7 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
   Widget _buildWalletOptions() {
     return Container(
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 66, 66, 66), // Black background
+        color: const Color(0xFF424242), // Black background
         borderRadius: BorderRadius.circular(12), // Rounded edges
       ),
       padding: EdgeInsets.all(4),
@@ -184,24 +187,6 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
         physics: NeverScrollableScrollPhysics(),
         childAspectRatio: 1.1,
         children: [
-          _buildOptionCard(
-            Icons.account_balance_wallet,
-            'History',
-            () {},
-          ),
-          _buildOptionCard(
-            Icons.credit_card,
-            'Add Money',
-            () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => QRCodePage(
-                          userPhoneNumber: number,
-                        )),
-              );
-            },
-          ),
           _buildOptionCard(
             Icons.history,
             'Transactions',
@@ -232,7 +217,11 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
             () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ElectricityBillScreen(userId: id,)),
+                MaterialPageRoute(
+                    builder: (context) => ElectricityBillScreen(
+                          number: number,
+                          userId: id,
+                        )),
               );
             },
           ),
@@ -257,5 +246,14 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
         ],
       ),
     );
+  }
+}
+
+String annotatedAmount(double amount) {
+  try {
+    final formatter = NumberFormat('#,##0.##'); // handles decimals too
+    return formatter.format(amount);
+  } catch (e) {
+    return amount.toString(); // safely return string
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:spring_roll_flutter/Utils/loadingIndicator.dart';
+import 'package:spring_roll_flutter/Utils/toast_utils.dart';
 import 'package:spring_roll_flutter/Wallet/Provider/fetch_qr_provider.dart';
 import 'package:spring_roll_flutter/Wallet/Screen/qrScannerPage.dart';
 
@@ -21,8 +23,27 @@ class _QRCodePageState extends ConsumerState<QRCodePage> {
   @override
   Widget build(BuildContext context) {
     final qrCodeState = ref.watch(qrProvider);
-
+    ref.listen(qrProvider, (previous, next) {
+      next.maybeMap(
+        orElse: () {},
+        loading: (value) {
+          if (value.loading!) {
+            CustomLoadingIndicator().show(context);
+          } else {
+            CustomLoadingIndicator().hide();
+          }
+        },
+        success: (value) async {},
+        loginError: (value) {
+          ToastUtils().showErrorToast(context, value.errorMessage ?? "");
+        },
+        error: (value) {
+          ToastUtils().showErrorToast(context, "Login Failure");
+        },
+      );
+    });
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: const Text("Your QR Code"),
         centerTitle: true,
@@ -41,7 +62,14 @@ class _QRCodePageState extends ConsumerState<QRCodePage> {
               child: Center(
                 child: qrCodeState.maybeWhen(
                   orElse: () {},
-                  loading: (Loading) => const CircularProgressIndicator(),
+                  loading: (loading) {
+                    CustomLoadingIndicator().show(context);
+                    // if (loading!) {
+                    //   CustomLoadingIndicator().show(context);
+                    // } else {
+                    //   CustomLoadingIndicator().hide();
+                    // }
+                  },
                   success: (data) {
                     return data != null
                         ? Image.memory(data)
@@ -60,21 +88,28 @@ class _QRCodePageState extends ConsumerState<QRCodePage> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
-                icon: const Icon(Icons.qr_code_scanner, color: Colors.white),
-                label: const Text("Scan QR Code"),
+                icon: const Icon(
+                  Icons.qr_code_scanner,
+                  color: Colors.white,
+                  size: 20,
+                ),
+                label: const Text(
+                  "Scan QR Code",
+                  style: TextStyle(color: Colors.white),
+                ),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   textStyle: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold),
-                  backgroundColor: Colors.blueAccent,
+                  backgroundColor: Color(0xFFB04E6D),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => QRScannerPage()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => QRScannerPage()),
+                  // );
                 },
               ),
             ),

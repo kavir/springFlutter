@@ -5,8 +5,10 @@ class ApiConfig {
   // static String prodServerUrl = 'http://192.168.1.94:5052';
   // static String prodOriginServerUrl = 'http://localhost:3000';
   //////////////////////////////////////
-  static String prodServerUrl = 'http://192.168.1.81:9090';
-  static String prodOriginServerUrl = 'http://localhost:9090';
+  static String prodServerUrl =
+      'https://springjava-production-e579.up.railway.app';
+  // static String prodServerUrl = 'http://192.168.1.81:9090';
+  static String prodOriginServerUrl = 'http://localhost:8080';
   // static String prodServerUrl = 'https://api.billin.space';
   // static String prodOriginServerUrl = '';
 
@@ -28,6 +30,7 @@ class ApiConfig {
   static const String apiUrl = "/api";
   static const String meter = "/meter";
   static const String bills = "/bills";
+  static const String pay = "/pay";
   static const String transaction = "/transactions";
   static const String wallet = "/wallet";
   static const String qr = "/qr";

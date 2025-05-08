@@ -17,7 +17,8 @@ class fundTransferProviderNotifier
   final Ref ref;
 
   fundTransferProviderNotifier(this.ref) : super(const AppState.initial());
-  Future<void> fundTransfer(String receiverId, String amount) async {
+  Future<void> fundTransfer(
+      String receiverId, String amount, String mpin) async {
     state = const AppState.loading(loading: true);
     final dio = ref.read(dioProvider);
     final number = ref.read(phoneNumberProvider.notifier).state;
@@ -31,6 +32,7 @@ class fundTransferProviderNotifier
       'senderNumber': number,
       'receiverNumber': receiverId,
       'amount': amount,
+      'mpin': mpin,
     };
     print("data to be sent for trasfer is ___$addEmployeeRequest");
     try {

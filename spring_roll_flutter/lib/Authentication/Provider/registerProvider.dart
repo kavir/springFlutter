@@ -15,7 +15,7 @@ class RegisterProviderNotifier extends StateNotifier<AppState<String>> {
 
   RegisterProviderNotifier(this.ref) : super(const AppState.initial());
   Future<void> register(String username, String firstname, String lastname,
-      String number, String password, String role) async {
+      String number, String password, String mPin, String role) async {
     final dio = ref.read(dioProvider);
     const url = ApiConfig.register;
     final data = RegisterRequestModel(
@@ -24,8 +24,9 @@ class RegisterProviderNotifier extends StateNotifier<AppState<String>> {
         lastname: lastname,
         number: number,
         password: password,
+        mpin: mPin,
         role: role);
-    print("the registered data are___$username::::$password:::$url");
+    print("the registered data are___$username::::$password:::$mPin::$url");
     try {
       state = const AppState.loading(loading: true);
       final response = await dio.post(

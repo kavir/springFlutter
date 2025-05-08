@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:spring_roll_flutter/Authentication/Provider/registerProvider.dart';
 import 'package:spring_roll_flutter/Authentication/Screen/loginScreen.dart';
+import 'package:spring_roll_flutter/Utils/loadingIndicator.dart';
 import 'package:spring_roll_flutter/Utils/toast_utils.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
@@ -18,6 +19,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _mPinController = TextEditingController();
 
   String? _role; // For the dropdown
   bool _isPasswordVisible = false; // Password visibility toggle
@@ -38,6 +40,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             _lastNameController.text,
             _phoneNumberController.text,
             _passwordController.text,
+            _mPinController.text,
             _role!,
           );
     }
@@ -48,8 +51,15 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     ref.listen(registerProvider, (prev, next) {
       next.maybeWhen(
         orElse: () {},
+        loading: (loading) {
+          if (loading!) {
+            CustomLoadingIndicator().show(context);
+          } else {
+            CustomLoadingIndicator().hide();
+          }
+        },
         success: (data) {
-          ToastUtils().showSuccessToast(context, "Registered In successfully");
+          ToastUtils().showSuccessToast(context, "Register Successful");
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -63,10 +73,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       );
     });
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text("Register", style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.blueAccent,
+        title: Text("Register",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+        backgroundColor: const Color(0xFFB04E6D),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -75,7 +86,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: const Color.fromARGB(255, 66, 66, 66),
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
@@ -99,14 +110,16 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: Colors.blueAccent,
+                          color: Colors.white,
                         ),
                       ),
                       SizedBox(height: 20),
                       TextFormField(
                         controller: _firstNameController,
+                        style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           labelText: 'First Name',
+                          labelStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: Colors.blueAccent),
@@ -124,8 +137,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       SizedBox(height: 16),
                       TextFormField(
                         controller: _lastNameController,
+                        style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           labelText: 'Last Name',
+                          labelStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: Colors.blueAccent),
@@ -143,8 +158,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       SizedBox(height: 16),
                       TextFormField(
                         controller: _usernameController,
+                        style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           labelText: 'Username',
+                          labelStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: Colors.blueAccent),
@@ -162,9 +179,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       SizedBox(height: 16),
                       TextFormField(
                         keyboardType: TextInputType.phone,
+                        style: const TextStyle(color: Colors.white),
                         controller: _phoneNumberController,
                         decoration: InputDecoration(
                           labelText: 'Phone Number',
+                          labelStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: Colors.blueAccent),
@@ -182,8 +201,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       SizedBox(height: 16),
                       TextFormField(
                         controller: _passwordController,
+                        style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           labelText: 'Password',
+                          labelStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: Colors.blueAccent),
@@ -213,6 +234,28 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         },
                       ),
                       SizedBox(height: 16),
+                      TextFormField(
+                        keyboardType: TextInputType.phone,
+                        style: const TextStyle(color: Colors.white),
+                        controller: _mPinController,
+                        decoration: InputDecoration(
+                          labelText: 'MPIN',
+                          labelStyle: TextStyle(color: Colors.white),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(color: Colors.blueAccent),
+                          ),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 14),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a MPIN';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 16),
                       DropdownButtonFormField<String>(
                         value: _role,
                         onChanged: (newValue) {
@@ -223,18 +266,33 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         items: _roles.map((role) {
                           return DropdownMenuItem<String>(
                             value: role,
-                            child: Text(role),
+                            child: Text(
+                              role,
+                              style: TextStyle(
+                                  color:
+                                      Colors.white), // Dropdown item text color
+                            ),
                           );
                         }).toList(),
                         decoration: InputDecoration(
                           labelText: 'Role',
-                          border: OutlineInputBorder(
+                          labelStyle: TextStyle(color: Colors.white),
+                          enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(color: Colors.blueAccent),
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(color: Colors.white),
                           ),
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 16, vertical: 14),
                         ),
+                        style: TextStyle(
+                            color: Colors.white), // Selected value text color
+                        dropdownColor:
+                            Colors.black, // Background of dropdown items
+                        iconEnabledColor: Colors.white, // Dropdown arrow color
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please select a role';
@@ -246,19 +304,24 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       ElevatedButton(
                         onPressed: _submitForm,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blueAccent,
+                          backgroundColor: const Color(0xFFB04E6D),
                           padding: EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        child: Text('Register', style: TextStyle(fontSize: 16)),
+                        child: Text('Register',
+                            style:
+                                TextStyle(fontSize: 16, color: Colors.white)),
                       ),
                       SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Already have an account?"),
+                          Text(
+                            "Already have an account?",
+                            style: TextStyle(color: Colors.white),
+                          ),
                           TextButton(
                             onPressed: () {
                               Navigator.push(

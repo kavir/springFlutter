@@ -10,6 +10,7 @@ class RegisterRequestModel with _$RegisterRequestModel {
     dynamic firstname,
     dynamic lastname,
     dynamic number,
+    dynamic mpin,
     dynamic password,
     dynamic role,
   }) = _RegisterRequestModel;

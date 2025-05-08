@@ -136,7 +136,48 @@ class _TransferFormState extends ConsumerState<TransferForm> {
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: submitForm,
+                    onPressed: () {
+                      final TextEditingController mpinController =
+                          TextEditingController();
+
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Enter MPIN'),
+                            content: TextField(
+                              controller: mpinController,
+                              keyboardType: TextInputType.number,
+                              obscureText: true,
+                              decoration: const InputDecoration(
+                                labelText: 'MPIN',
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  final String mpin = mpinController.text;
+                                  if (mpin.isNotEmpty) {
+                                    submitForm(mpin);
+                                  }
+                                  Navigator.of(context)
+                                      .pop(); // Close the dialog
+                                },
+                                child: const Text('Pay Now'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    // onPressed: submitForm,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromRGBO(
                           176, 78, 109, 1), // Set button color to teal
@@ -158,20 +199,15 @@ class _TransferFormState extends ConsumerState<TransferForm> {
     );
   }
 
-  void submitForm() {
+  void submitForm(String mpin) {
     if (_formKey.currentState!.validate()) {
       final receiverId = _receiverIdController.text;
       final amount = _amountController.text;
       final senderId = ref.read(phoneNumberProvider.notifier).state;
-      // final message = {
-      //   'receiverId': receiverId,
-      //   'senderId': senderId,
-      //   'amount': amount,
-      // };
 
-      // final webSocketService = ref.watch(webSocketProvider);
-      // webSocketService.sendMessage(jsonEncode(message));
-      ref.read(fundTransferProvider.notifier).fundTransfer(receiverId, amount);
+      ref
+          .read(fundTransferProvider.notifier)
+          .fundTransfer(receiverId, amount, mpin);
     }
   }
 

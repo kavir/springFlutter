@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
-import 'package:spring_roll_flutter/Wallet/Screen/fun_transfer_screen.dart';
+import 'package:spring_roll_flutter/Utils/loadingIndicator.dart';
+import 'package:spring_roll_flutter/Wallet/Provider/fetch_qr_provider.dart';
+import 'package:spring_roll_flutter/Wallet/Screen/fun_transfer_screen.dart'; // To generate QR code
 
-class QRScannerPage extends StatefulWidget {
+class QRScannerPage extends ConsumerStatefulWidget {
+  final String userPhoneNumber;
+  const QRScannerPage({super.key, required this.userPhoneNumber});
+
   @override
-  _QRScannerPageState createState() => _QRScannerPageState();
+  ConsumerState<QRScannerPage> createState() => _QRScannerPageState();
 }
 
-class _QRScannerPageState extends State<QRScannerPage> {
+class _QRScannerPageState extends ConsumerState<QRScannerPage> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
   String scannedData = '';
-  bool isProcessing = false; // Prevents multiple scans
+  bool isProcessing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    ref.read(qrProvider.notifier).generateQR(widget.userPhoneNumber);
+  }
 
   @override
   void dispose() {
@@ -19,16 +31,56 @@ class _QRScannerPageState extends State<QRScannerPage> {
     super.dispose();
   }
 
+  void _showBottomSheetForQRCode() {
+    final qrCodeState = ref.watch(qrProvider);
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Color(0xFFB04E6D),
+      builder: (BuildContext context) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.3,
+          minChildSize: 0.2,
+          maxChildSize: 0.9,
+          expand: false,
+          builder: (context, scrollController) {
+            return Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              ),
+              padding: const EdgeInsets.all(16),
+              child: qrCodeState.maybeWhen(
+                orElse: () {},
+                loading: (loading) {
+                  CustomLoadingIndicator().show(context);
+                  return Center(child: CircularProgressIndicator());
+                },
+                success: (data) {
+                  return data != null
+                      ? Image.memory(data) // Display the QR code as an image
+                      : const Text(
+                          'No data received',
+                          style: TextStyle(fontSize: 16, color: Colors.red),
+                        );
+                },
+                error: (error) => Text(
+                  'Error: $error',
+                  style: const TextStyle(fontSize: 16, color: Colors.red),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: const Text("Scan QR Code"),
-        centerTitle: true,
-        backgroundColor: Colors.black,
-        elevation: 0,
-      ),
       body: Stack(
         children: [
           // QR Scanner View
@@ -44,46 +96,18 @@ class _QRScannerPageState extends State<QRScannerPage> {
             ),
           ),
 
-          // Scanning Animation (Optional)
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 250),
-                const CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  scannedData.isEmpty ? "Scanning..." : "Scanned: $scannedData",
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Camera Controls
           Positioned(
-            bottom: 50,
+            top: 40,
             left: 20,
             right: 20,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
                   icon: Icon(Icons.flash_on, color: Colors.white, size: 30),
                   onPressed: () async {
                     await controller?.toggleFlash();
-                  },
-                ),
-                IconButton(
-                  icon: Icon(Icons.flip_camera_ios, color: Colors.white, size: 30),
-                  onPressed: () async {
-                    await controller?.flipCamera();
                   },
                 ),
                 IconButton(
@@ -95,7 +119,34 @@ class _QRScannerPageState extends State<QRScannerPage> {
               ],
             ),
           ),
+
+          Positioned(
+            bottom: 80,
+            left: 20,
+            right: 20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.flip_camera_ios,
+                      color: Colors.white, size: 30),
+                  onPressed: () async {
+                    await controller?.flipCamera();
+                  },
+                ),
+              ],
+            ),
+          ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xFFB04E6D),
+        onPressed:
+            _showBottomSheetForQRCode, // Open the Bottom Sheet to show QR code
+        child: const Icon(
+          Icons.qr_code,
+          color: Colors.white,
+        ),
       ),
     );
   }
