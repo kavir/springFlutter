@@ -243,11 +243,11 @@ class _TransferFormState extends ConsumerState<TransferForm> {
               SizedBox(height: 12),
               Divider(thickness: 1.2),
               SizedBox(height: 12),
-              _buildTransactionDetailRow('Amount', '\$${response.amount}'),
+              _buildTransactionDetailRow('Amount:', '\NRP ${response.amount}'),
               _buildTransactionDetailRow(
-                  'Receiver Name', response.receiverName),
+                  'Receiver Name:', response.receiverName),
               _buildTransactionDetailRow(
-                  'Receiver Number', response.receiverNumber),
+                  'Receiver Number:', response.receiverNumber),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
@@ -255,12 +255,14 @@ class _TransferFormState extends ConsumerState<TransferForm> {
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal, // Set button color to teal
+                  backgroundColor: Color.fromRGBO(
+                      176, 78, 109, 1), // Set button color to teal
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                   padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                 ),
-                child: Text('OK', style: TextStyle(fontSize: 16)),
+                child: Text('OK',
+                    style: TextStyle(fontSize: 16, color: Colors.white)),
               ),
             ],
           ),
@@ -273,16 +275,50 @@ class _TransferFormState extends ConsumerState<TransferForm> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment:
+            CrossAxisAlignment.start, // Align to top if wrapping
         children: [
-          Text(title,
+          Expanded(
+            flex: 3,
+            child: Text(
+              title,
               style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  color: Colors.white)), // White text
-          Text(value, style: TextStyle(color: Colors.blueAccent, fontSize: 16)),
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          SizedBox(width: 10), // Space between title and value
+          Expanded(
+            flex: 5,
+            child: Text(
+              value,
+              style: TextStyle(color: Colors.white, fontSize: 16),
+              softWrap: true,
+              maxLines: null, // Allows unlimited lines
+              overflow: TextOverflow.visible,
+            ),
+          ),
         ],
       ),
     );
   }
+
+  // Widget _buildTransactionDetailRow(String title, String value) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(vertical: 6.0),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //       children: [
+  //         Text(title,
+  //             style: TextStyle(
+  //                 fontWeight: FontWeight.w500,
+  //                 fontSize: 16,
+  //                 color: Colors.white)), // White text
+  //         Text(value, style: TextStyle(color: Colors.white, fontSize: 16)),
+  //       ],
+  //     ),
+  //   );
+  // }
 }

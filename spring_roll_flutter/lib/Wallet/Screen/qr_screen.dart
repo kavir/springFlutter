@@ -34,11 +34,11 @@ class _QRCodePageState extends ConsumerState<QRCodePage> {
           }
         },
         success: (value) async {},
-        loginError: (value) {
-          ToastUtils().showErrorToast(context, value.errorMessage ?? "");
-        },
+        // loginError: (value) {
+        //   ToastUtils().showErrorToast(context, value.errorMessage ?? "");
+        // },
         error: (value) {
-          ToastUtils().showErrorToast(context, "Login Failure");
+          ToastUtils().showErrorToast(context, "Fetching qr failure");
         },
       );
     });

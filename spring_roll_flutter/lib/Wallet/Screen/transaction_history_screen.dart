@@ -104,7 +104,7 @@ class _TransactionHistoryPageState
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: const Color.fromARGB(255, 255, 255, 255),
                         ),
                       ),
                       IconButton(
@@ -233,8 +233,8 @@ class _TransactionHistoryPageState
                                                 ? Icons.arrow_drop_down
                                                 : Icons.arrow_drop_up,
                                             color: isSender
-                                                ? Colors.red
-                                                : Colors.green,
+                                                ? const Color.fromRGBO(244, 67, 54, 1)
+                                                : const Color.fromRGBO(76, 175, 80, 1),
                                             size: 18,
                                           ),
                                           Text(

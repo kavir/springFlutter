@@ -45,11 +45,11 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
         success: (value) async {
           ref.read(indvDahsboardInfoProvider.notifier).indvInfoProvider();
         },
-        loginError: (value) {
-          ToastUtils().showErrorToast(context, value.errorMessage ?? "");
-        },
+        // loginError: (value) {
+        //   ToastUtils().showErrorToast(context, value.errorMessage ?? "");
+        // },
         error: (value) {
-          ToastUtils().showErrorToast(context, "Login Failure");
+          ToastUtils().showErrorToast(context, "Unable to transfer fund");
         },
       );
     });

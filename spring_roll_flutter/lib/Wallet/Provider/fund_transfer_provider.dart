@@ -18,29 +18,27 @@ class fundTransferProviderNotifier
 
   fundTransferProviderNotifier(this.ref) : super(const AppState.initial());
   Future<void> fundTransfer(
-      String receiverId, String amount, String mpin) async {
+      String receiverNumber, String amount, String mpin) async {
     state = const AppState.loading(loading: true);
     final dio = ref.read(dioProvider);
     final number = ref.read(phoneNumberProvider.notifier).state;
+    final stringNumber = number.toString();
     final url = '${ApiConfig.apiUrl}${ApiConfig.wallet}${ApiConfig.transfer}';
-    final addEmployeeRequest = TransferDataModel(
-      senderNumber: number,
-      receiverNumber: receiverId,
-      amount: amount,
-    );
+    final doubleAmount = double.tryParse(amount);
+    final cleanedReceiverNumber = receiverNumber.replaceAll(RegExp(r'\s+'), '');
     final queryParams = {
-      'senderNumber': number,
-      'receiverNumber': receiverId,
-      'amount': amount,
+      'senderNumber': stringNumber,
+      'receiverNumber': cleanedReceiverNumber,
+      'amount': doubleAmount,
       'mpin': mpin,
     };
-    print("data to be sent for trasfer is ___$addEmployeeRequest");
     try {
       final String? token = await ref.read(tokenProvider);
       final String cleanedToken =
           token?.replaceAll(RegExp(r'token:|[{}]'), '')?.trim() ?? '';
       print(
-          "data to be transferred siuuuu are __$receiverId::$amount::::$cleanedToken");
+          "data to be transferred siuuuu are __$stringNumber:::$cleanedReceiverNumber::$doubleAmount::::$mpin");
+      print("the querry param is ___$queryParams");
       final response = await dio.post(
         url,
         queryParameters: queryParams,
