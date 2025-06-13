@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:dio/dio.dart';
 import 'package:spring_roll_flutter/Authentication/Model/loginRequestModel.dart';
+import 'package:spring_roll_flutter/Authentication/Model/loginResponseModel.dart';
 import 'package:spring_roll_flutter/Utils/api_config.dart';
 import 'package:spring_roll_flutter/State/appState.dart';
 import 'package:spring_roll_flutter/Utils/dio_provider.dart';
@@ -9,11 +10,13 @@ final tokenProvider = StateProvider<String>((ref) => '');
 final phoneNumberProvider = StateProvider<String>((ref) => '');
 
 final loginProvider =
-    StateNotifierProvider<LoginProviderNotifier, AppState<String>>((ref) {
+    StateNotifierProvider<LoginProviderNotifier, AppState<LoginResponseModel>>(
+        (ref) {
   return LoginProviderNotifier(ref);
 });
 
-class LoginProviderNotifier extends StateNotifier<AppState<String>> {
+class LoginProviderNotifier
+    extends StateNotifier<AppState<LoginResponseModel>> {
   final Ref ref;
 
   LoginProviderNotifier(this.ref) : super(const AppState.initial());
@@ -36,11 +39,13 @@ class LoginProviderNotifier extends StateNotifier<AppState<String>> {
 
       if (response.statusCode == 200) {
         final jsonResponse = response.data;
-        ref.read(tokenProvider.notifier).state = jsonResponse.toString();
+        final loginResponse = LoginResponseModel.fromJson(jsonResponse);
+        print("the token is __${loginResponse.token}");
+        ref.read(tokenProvider.notifier).state = loginResponse.token;
         ref.read(phoneNumberProvider.notifier).state = number;
         // ref.read(tokenProvider.notifier).storeToken(jsonResponse.toString());
         print("login vayo hae guys$jsonResponse");
-        state = AppState.success(data: jsonResponse.toString());
+        state = AppState.success(data: loginResponse);
       } else {
         throw Exception('Failed to load employee details');
       }

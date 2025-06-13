@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:spring_roll_flutter/Utils/toast_utils.dart';
+import 'package:spring_roll_flutter/Wallet/Provider/fetchRewardPoints.dart';
 import 'package:spring_roll_flutter/Wallet/Provider/fund_transfer_provider.dart';
 import 'package:spring_roll_flutter/Wallet/Provider/indv_user_dashBoard_info_provider.dart';
 import 'package:spring_roll_flutter/Wallet/Provider/web_socket_provider.dart';
 import 'package:spring_roll_flutter/Wallet/Screen/ElectricityScreen.dart';
 import 'package:spring_roll_flutter/Wallet/Screen/fun_transfer_screen.dart';
-import 'package:spring_roll_flutter/Wallet/Screen/qr_screen.dart';
 import 'package:spring_roll_flutter/Wallet/Screen/transaction_history_screen.dart';
 import 'package:intl/intl.dart';
 
@@ -28,12 +28,22 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
   String name = '';
   String number = '';
   double amount = 0.0;
+  String rewards = '';
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   ref.read(indvDahsboardInfoProvider.notifier).indvInfoProvider();
-    // });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.watch(indvDahsboardInfoProvider).maybeWhen(
+            success: (useryDetails) {
+              id = useryDetails!.userId;
+              name = useryDetails.userName;
+              number = useryDetails.userPhoneNumber;
+              amount = useryDetails.walletBalance;
+            },
+            orElse: () => 'No Logo',
+          );
+      ref.read(rewardPointsProvider.notifier).rewardPointProvider(id);
+    });
   }
 
   @override
@@ -45,23 +55,18 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
         success: (value) async {
           ref.read(indvDahsboardInfoProvider.notifier).indvInfoProvider();
         },
-        // loginError: (value) {
-        //   ToastUtils().showErrorToast(context, value.errorMessage ?? "");
-        // },
         error: (value) {
           ToastUtils().showErrorToast(context, "Unable to transfer fund");
         },
       );
     });
-    ref.watch(indvDahsboardInfoProvider).maybeWhen(
-        success: (useryDetails) {
-          id = useryDetails!.userId;
-          name = useryDetails.userName;
-          number = useryDetails.userPhoneNumber;
-          amount = useryDetails.walletBalance;
-          print("the user ko number is ___$number");
-        },
-        orElse: () => 'No Logo');
+
+    ref.watch(rewardPointsProvider).maybeWhen(
+          success: (rewardPoints) {
+            rewards = rewardPoints.toString();
+          },
+          orElse: () => 'No Logo',
+        );
     _webSocketService = WebSocketService(id.toString());
 
     // Listen to balance updates
@@ -127,45 +132,77 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
   Widget _buildBalanceSection() {
     return Container(
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 66, 66, 66), // Black background
-        borderRadius: BorderRadius.circular(12), // More rounded edges
+        color: const Color.fromARGB(255, 66, 66, 66),
+        borderRadius: BorderRadius.circular(12),
       ),
-      padding: EdgeInsets.symmetric(
-          vertical: 8, horizontal: 12), // Padding for spacing
-      child: Column(
-        mainAxisSize: MainAxisSize.min, // Reduce space inside the column
-        crossAxisAlignment: CrossAxisAlignment.start,
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                _isBalanceVisible
-                    ? 'NPR ${annotatedAmount(amount)}'
-                    : 'NPR XXXX.XX',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white, // White text for contrast
-                ),
+              Row(
+                children: [
+                  Text(
+                    _isBalanceVisible
+                        ? 'NPR ${annotatedAmount(amount)}'
+                        : 'NPR XXXX.XX',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      _isBalanceVisible
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isBalanceVisible = !_isBalanceVisible;
+                      });
+                    },
+                  ),
+                ],
               ),
-              IconButton(
-                icon: Icon(
-                  _isBalanceVisible ? Icons.visibility_off : Icons.visibility,
-                  color: Colors.white,
-                  size: 18, // Reduce icon size for better alignment
-                ),
-                onPressed: () {
-                  setState(() {
-                    _isBalanceVisible = !_isBalanceVisible;
-                  });
-                },
+              Text(
+                'Balance',
+                style: TextStyle(fontSize: 14, color: Colors.white),
               ),
             ],
           ),
-          Text(
-            'Balance',
-            style: TextStyle(
-                fontSize: 14, color: Colors.white), // White text for contrast
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    rewards, // Make sure this is a string like '5850.00'
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(width: 4),
+                  Icon(
+                    Icons.workspace_premium,
+                    color: Colors.white,
+                    size: 18,
+                  ),
+                ],
+              ),
+              Text(
+                'Reward Points',
+                style: TextStyle(fontSize: 14, color: Colors.white),
+              ),
+            ],
           ),
         ],
       ),
@@ -195,7 +232,7 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => TransactionHistoryPage(
-                          userId: id ?? 0,
+                          userId: id,
                           amount: amount,
                         )),
               );

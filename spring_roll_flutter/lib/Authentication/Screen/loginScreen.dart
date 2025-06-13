@@ -32,7 +32,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           }
         },
         success: (data) {
-          ToastUtils().showSuccessToast(context, "Login Successful");
+          ToastUtils().showSuccessToast(context, data!.message);
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -41,7 +41,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           );
         },
         error: (e) {
-          ToastUtils().showErrorToast(context, "Failed to login");
+          ToastUtils().showErrorToast(context, e!.message);
         },
       );
     });

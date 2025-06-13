@@ -24,7 +24,7 @@ class IndvUserDashBoardInfoProviderNotifier
     final dio = ref.read(dioProvider);
     final number = ref.read(phoneNumberProvider.notifier).state;
     final url = '${ApiConfig.apiUrl}${ApiConfig.wallet}${ApiConfig.userWallet}';
-    print("the url is ___$url");
+    print("the url is ___$url:::$number");
     final queryParams = {
       'number': number,
     };
@@ -32,6 +32,7 @@ class IndvUserDashBoardInfoProviderNotifier
       final String? token = await ref.read(tokenProvider);
       final String cleanedToken =
           token?.replaceAll(RegExp(r'token:|[{}]'), '')?.trim() ?? '';
+      print("haha okay yaha samma tw aayiiyo::$cleanedToken");
       final response = await dio.get(
         url,
         queryParameters: queryParams,
@@ -50,6 +51,7 @@ class IndvUserDashBoardInfoProviderNotifier
         state = const AppState.loading(loading: false);
         state = AppState.success(data: customers);
       } else {
+        print("yaha gayo ni tw guys");
         state = const AppState.loading(loading: false);
         state = AppState.error();
       }

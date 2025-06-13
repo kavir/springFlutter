@@ -59,7 +59,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           }
         },
         success: (data) {
-          ToastUtils().showSuccessToast(context, "Register Successful");
+          ToastUtils().showSuccessToast(context, data?.message);
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -68,7 +68,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           );
         },
         error: (e) {
-          ToastUtils().showErrorToast(context, "Failed to register");
+          ToastUtils().showErrorToast(context, e?.message);
         },
       );
     });
