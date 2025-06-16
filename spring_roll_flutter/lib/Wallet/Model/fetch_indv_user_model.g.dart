@@ -12,7 +12,10 @@ _$FetchIndvUserDataModelImpl _$$FetchIndvUserDataModelImplFromJson(
       userId: json['userId'],
       userName: json['userName'],
       userPhoneNumber: json['userPhoneNumber'],
+      userProfile: json['userProfile'],
       walletBalance: json['walletBalance'],
+      firstName: json['firstName'],
+      lastName: json['lastName'],
     );
 
 Map<String, dynamic> _$$FetchIndvUserDataModelImplToJson(
@@ -21,5 +24,8 @@ Map<String, dynamic> _$$FetchIndvUserDataModelImplToJson(
       'userId': instance.userId,
       'userName': instance.userName,
       'userPhoneNumber': instance.userPhoneNumber,
+      'userProfile': instance.userProfile,
       'walletBalance': instance.walletBalance,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
     };

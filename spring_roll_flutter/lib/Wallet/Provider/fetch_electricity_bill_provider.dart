@@ -17,7 +17,7 @@ class ElectricityBillProviderNotifier
   final Ref ref;
 
   ElectricityBillProviderNotifier(this.ref) : super(const AppState.initial());
-  Future<void> getBills(int id) async {
+  Future<void> getBills(int? id) async {
     state = const AppState.loading(loading: true);
     final dio = ref.read(dioProvider);
     final url = '${ApiConfig.apiUrl}${ApiConfig.meter}${ApiConfig.bills}/$id';

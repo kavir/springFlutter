@@ -24,7 +24,10 @@ mixin _$FetchIndvUserDataModel {
   dynamic get userId => throw _privateConstructorUsedError;
   dynamic get userName => throw _privateConstructorUsedError;
   dynamic get userPhoneNumber => throw _privateConstructorUsedError;
+  dynamic get userProfile => throw _privateConstructorUsedError;
   dynamic get walletBalance => throw _privateConstructorUsedError;
+  dynamic get firstName => throw _privateConstructorUsedError;
+  dynamic get lastName => throw _privateConstructorUsedError;
 
   /// Serializes this FetchIndvUserDataModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,7 +49,10 @@ abstract class $FetchIndvUserDataModelCopyWith<$Res> {
       {dynamic userId,
       dynamic userName,
       dynamic userPhoneNumber,
-      dynamic walletBalance});
+      dynamic userProfile,
+      dynamic walletBalance,
+      dynamic firstName,
+      dynamic lastName});
 }
 
 /// @nodoc
@@ -68,7 +74,10 @@ class _$FetchIndvUserDataModelCopyWithImpl<$Res,
     Object? userId = freezed,
     Object? userName = freezed,
     Object? userPhoneNumber = freezed,
+    Object? userProfile = freezed,
     Object? walletBalance = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
@@ -83,9 +92,21 @@ class _$FetchIndvUserDataModelCopyWithImpl<$Res,
           ? _value.userPhoneNumber
           : userPhoneNumber // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      userProfile: freezed == userProfile
+          ? _value.userProfile
+          : userProfile // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       walletBalance: freezed == walletBalance
           ? _value.walletBalance
           : walletBalance // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as dynamic,
     ) as $Val);
   }
@@ -104,7 +125,10 @@ abstract class _$$FetchIndvUserDataModelImplCopyWith<$Res>
       {dynamic userId,
       dynamic userName,
       dynamic userPhoneNumber,
-      dynamic walletBalance});
+      dynamic userProfile,
+      dynamic walletBalance,
+      dynamic firstName,
+      dynamic lastName});
 }
 
 /// @nodoc
@@ -125,7 +149,10 @@ class __$$FetchIndvUserDataModelImplCopyWithImpl<$Res>
     Object? userId = freezed,
     Object? userName = freezed,
     Object? userPhoneNumber = freezed,
+    Object? userProfile = freezed,
     Object? walletBalance = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
   }) {
     return _then(_$FetchIndvUserDataModelImpl(
       userId: freezed == userId
@@ -140,9 +167,21 @@ class __$$FetchIndvUserDataModelImplCopyWithImpl<$Res>
           ? _value.userPhoneNumber
           : userPhoneNumber // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      userProfile: freezed == userProfile
+          ? _value.userProfile
+          : userProfile // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       walletBalance: freezed == walletBalance
           ? _value.walletBalance
           : walletBalance // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as dynamic,
     ));
   }
@@ -152,7 +191,13 @@ class __$$FetchIndvUserDataModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$FetchIndvUserDataModelImpl implements _FetchIndvUserDataModel {
   const _$FetchIndvUserDataModelImpl(
-      {this.userId, this.userName, this.userPhoneNumber, this.walletBalance});
+      {this.userId,
+      this.userName,
+      this.userPhoneNumber,
+      this.userProfile,
+      this.walletBalance,
+      this.firstName,
+      this.lastName});
 
   factory _$FetchIndvUserDataModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$FetchIndvUserDataModelImplFromJson(json);
@@ -164,11 +209,17 @@ class _$FetchIndvUserDataModelImpl implements _FetchIndvUserDataModel {
   @override
   final dynamic userPhoneNumber;
   @override
+  final dynamic userProfile;
+  @override
   final dynamic walletBalance;
+  @override
+  final dynamic firstName;
+  @override
+  final dynamic lastName;
 
   @override
   String toString() {
-    return 'FetchIndvUserDataModel(userId: $userId, userName: $userName, userPhoneNumber: $userPhoneNumber, walletBalance: $walletBalance)';
+    return 'FetchIndvUserDataModel(userId: $userId, userName: $userName, userPhoneNumber: $userPhoneNumber, userProfile: $userProfile, walletBalance: $walletBalance, firstName: $firstName, lastName: $lastName)';
   }
 
   @override
@@ -181,7 +232,11 @@ class _$FetchIndvUserDataModelImpl implements _FetchIndvUserDataModel {
             const DeepCollectionEquality()
                 .equals(other.userPhoneNumber, userPhoneNumber) &&
             const DeepCollectionEquality()
-                .equals(other.walletBalance, walletBalance));
+                .equals(other.userProfile, userProfile) &&
+            const DeepCollectionEquality()
+                .equals(other.walletBalance, walletBalance) &&
+            const DeepCollectionEquality().equals(other.firstName, firstName) &&
+            const DeepCollectionEquality().equals(other.lastName, lastName));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -191,7 +246,10 @@ class _$FetchIndvUserDataModelImpl implements _FetchIndvUserDataModel {
       const DeepCollectionEquality().hash(userId),
       const DeepCollectionEquality().hash(userName),
       const DeepCollectionEquality().hash(userPhoneNumber),
-      const DeepCollectionEquality().hash(walletBalance));
+      const DeepCollectionEquality().hash(userProfile),
+      const DeepCollectionEquality().hash(walletBalance),
+      const DeepCollectionEquality().hash(firstName),
+      const DeepCollectionEquality().hash(lastName));
 
   /// Create a copy of FetchIndvUserDataModel
   /// with the given fields replaced by the non-null parameter values.
@@ -215,7 +273,10 @@ abstract class _FetchIndvUserDataModel implements FetchIndvUserDataModel {
       {final dynamic userId,
       final dynamic userName,
       final dynamic userPhoneNumber,
-      final dynamic walletBalance}) = _$FetchIndvUserDataModelImpl;
+      final dynamic userProfile,
+      final dynamic walletBalance,
+      final dynamic firstName,
+      final dynamic lastName}) = _$FetchIndvUserDataModelImpl;
 
   factory _FetchIndvUserDataModel.fromJson(Map<String, dynamic> json) =
       _$FetchIndvUserDataModelImpl.fromJson;
@@ -227,7 +288,13 @@ abstract class _FetchIndvUserDataModel implements FetchIndvUserDataModel {
   @override
   dynamic get userPhoneNumber;
   @override
+  dynamic get userProfile;
+  @override
   dynamic get walletBalance;
+  @override
+  dynamic get firstName;
+  @override
+  dynamic get lastName;
 
   /// Create a copy of FetchIndvUserDataModel
   /// with the given fields replaced by the non-null parameter values.

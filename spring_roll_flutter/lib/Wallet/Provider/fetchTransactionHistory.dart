@@ -18,8 +18,8 @@ class TransactionHistoryProviderNotifier
 
   TransactionHistoryProviderNotifier(this.ref)
       : super(const AppState.initial());
-  Future<void> transaction(
-      int id, String selectedFilter, String? startDate, String? endDate) async {
+  Future<void> transaction(int? id, String selectedFilter, String? startDate,
+      String? endDate) async {
     state = const AppState.loading(loading: true);
     final dio = ref.read(dioProvider);
     final url = '${ApiConfig.apiUrl}${ApiConfig.transaction}/$id';

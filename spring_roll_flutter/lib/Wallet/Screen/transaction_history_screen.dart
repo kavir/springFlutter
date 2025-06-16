@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:spring_roll_flutter/Wallet/Provider/fetchTransactionHistory.dart';
 
 class TransactionHistoryPage extends ConsumerStatefulWidget {
-  final int userId;
+  final int? userId;
   final double amount;
   const TransactionHistoryPage(
       {super.key, required this.userId, required this.amount});
@@ -233,8 +233,10 @@ class _TransactionHistoryPageState
                                                 ? Icons.arrow_drop_down
                                                 : Icons.arrow_drop_up,
                                             color: isSender
-                                                ? const Color.fromRGBO(244, 67, 54, 1)
-                                                : const Color.fromRGBO(76, 175, 80, 1),
+                                                ? const Color.fromRGBO(
+                                                    244, 67, 54, 1)
+                                                : const Color.fromRGBO(
+                                                    76, 175, 80, 1),
                                             size: 18,
                                           ),
                                           Text(

@@ -9,7 +9,10 @@ class FetchIndvUserDataModel with _$FetchIndvUserDataModel {
     dynamic userId,
     dynamic userName,
     dynamic userPhoneNumber,
+    dynamic userProfile,
     dynamic walletBalance,
+    dynamic firstName,
+    dynamic lastName,
   }) = _FetchIndvUserDataModel;
 
   factory FetchIndvUserDataModel.fromJson(Map<String, dynamic> json) =>

@@ -8,6 +8,7 @@ import 'package:spring_roll_flutter/Wallet/Provider/fund_transfer_provider.dart'
 import 'package:spring_roll_flutter/Wallet/Provider/indv_user_dashBoard_info_provider.dart';
 import 'package:spring_roll_flutter/Wallet/Provider/web_socket_provider.dart';
 import 'package:spring_roll_flutter/Wallet/Screen/ElectricityScreen.dart';
+import 'package:spring_roll_flutter/Wallet/Screen/editUserProfile.dart';
 import 'package:spring_roll_flutter/Wallet/Screen/fun_transfer_screen.dart';
 import 'package:spring_roll_flutter/Wallet/Screen/transaction_history_screen.dart';
 import 'package:intl/intl.dart';
@@ -22,9 +23,9 @@ class WalletHomePage extends ConsumerStatefulWidget {
 }
 
 class _WalletHomePageState extends ConsumerState<WalletHomePage> {
-  late WebSocketService _webSocketService;
+  // late WebSocketService _webSocketService;
   bool _isBalanceVisible = false;
-  int id = 0;
+  int? id = 0;
   String name = '';
   String number = '';
   double amount = 0.0;
@@ -36,6 +37,7 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
       ref.watch(indvDahsboardInfoProvider).maybeWhen(
             success: (useryDetails) {
               id = useryDetails!.userId;
+              print("the id is ___$id");
               name = useryDetails.userName;
               number = useryDetails.userPhoneNumber;
               amount = useryDetails.walletBalance;
@@ -67,15 +69,15 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
           },
           orElse: () => 'No Logo',
         );
-    _webSocketService = WebSocketService(id.toString());
+    // _webSocketService = WebSocketService(id.toString());
 
     // Listen to balance updates
-    _webSocketService.balanceStream.listen((message) {
-      final updatedBalance = jsonDecode(message);
-      setState(() {
-        amount = updatedBalance;
-      });
-    });
+    // _webSocketService.balanceStream.listen((message) {
+    //   final updatedBalance = jsonDecode(message);
+    //   setState(() {
+    //     amount = updatedBalance;
+    //   });
+    // });
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
@@ -90,23 +92,42 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
               backgroundColor: Color.fromARGB(255, 176, 78, 109),
               child: Icon(Icons.account_circle, size: 35, color: Colors.white),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
               children: [
-                Text(
-                  "Hi, $name",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Hi, $name",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      number,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  number,
-                  style: TextStyle(
-                    fontSize: 12,
+                IconButton(
+                  icon: Icon(
+                    Icons.edit,
                     color: Colors.white,
+                    size: 20,
                   ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EditUserProfileScreen()),
+                    );
+                  },
                 ),
               ],
             ),

@@ -15,8 +15,8 @@ class RewardPointsProviderNotifier extends StateNotifier<AppState<String>> {
   final Ref ref;
 
   RewardPointsProviderNotifier(this.ref) : super(const AppState.initial());
-  Future<void> rewardPointProvider(int userId) async {
-    print("reward all ok");
+  Future<void> rewardPointProvider(int? userId) async {
+    print("reward all ok___$userId");
     state = const AppState.loading(loading: true);
     final dio = ref.read(dioProvider);
     final url = '${ApiConfig.apiUrl}${ApiConfig.getRewardPoints}/$userId';

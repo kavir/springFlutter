@@ -5,7 +5,7 @@ import 'package:spring_roll_flutter/Wallet/Provider/fetch_electricity_bill_provi
 import 'package:spring_roll_flutter/Wallet/Provider/payNEABillProvider.dart';
 
 class ElectricityBillScreen extends ConsumerStatefulWidget {
-  final int userId;
+  final int? userId;
   final String number;
 
   const ElectricityBillScreen(

@@ -1,27 +1,27 @@
-import 'package:web_socket_channel/web_socket_channel.dart';
+// import 'package:web_socket_channel/web_socket_channel.dart';
 
-class WebSocketService {
-  final WebSocketChannel channel;
+// class WebSocketService {
+//   final WebSocketChannel channel;
 
-  WebSocketService(String userId)
-      : channel = WebSocketChannel.connect(
-          Uri.parse(
-              'ws://192.168.1.81:9090/ws/balance/$userId'), // Update this with your server URL
-        );
+//   WebSocketService(String userId)
+//       : channel = WebSocketChannel.connect(
+//           Uri.parse(
+//               'ws://192.168.1.81:9090/ws/balance/$userId'), // Update this with your server URL
+//         );
 
-  // Listen for messages
-  Stream<dynamic> get balanceStream => channel.stream;
+//   // Listen for messages
+//   Stream<dynamic> get balanceStream => channel.stream;
 
-  // Send a message to the backend if needed
-  void sendMessage(String message) {
-    channel.sink.add(message);
-  }
+//   // Send a message to the backend if needed
+//   void sendMessage(String message) {
+//     channel.sink.add(message);
+//   }
 
-  // Close the WebSocket connection
-  void close() {
-    channel.sink.close();
-  }
-}
+//   // Close the WebSocket connection
+//   void close() {
+//     channel.sink.close();
+//   }
+// }
 
 // import 'package:hooks_riverpod/hooks_riverpod.dart';
 // import 'package:web_socket_channel/io.dart';
