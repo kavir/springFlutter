@@ -12,6 +12,7 @@ _$FundTransferResponseModelImpl _$$FundTransferResponseModelImplFromJson(
       status: json['status'] as String,
       message: json['message'] as String,
       amount: (json['amount'] as num).toDouble(),
+      serviceChargeAmount: (json['serviceChargeAmount'] as num).toDouble(),
       receiverName: json['receiverName'] as String,
       receiverNumber: json['receiverNumber'] as String,
     );
@@ -22,6 +23,7 @@ Map<String, dynamic> _$$FundTransferResponseModelImplToJson(
       'status': instance.status,
       'message': instance.message,
       'amount': instance.amount,
+      'serviceChargeAmount': instance.serviceChargeAmount,
       'receiverName': instance.receiverName,
       'receiverNumber': instance.receiverNumber,
     };

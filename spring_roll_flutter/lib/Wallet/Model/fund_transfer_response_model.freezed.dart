@@ -24,6 +24,7 @@ mixin _$FundTransferResponseModel {
   String get status => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
+  double get serviceChargeAmount => throw _privateConstructorUsedError;
   String get receiverName => throw _privateConstructorUsedError;
   String get receiverNumber => throw _privateConstructorUsedError;
 
@@ -47,6 +48,7 @@ abstract class $FundTransferResponseModelCopyWith<$Res> {
       {String status,
       String message,
       double amount,
+      double serviceChargeAmount,
       String receiverName,
       String receiverNumber});
 }
@@ -70,6 +72,7 @@ class _$FundTransferResponseModelCopyWithImpl<$Res,
     Object? status = null,
     Object? message = null,
     Object? amount = null,
+    Object? serviceChargeAmount = null,
     Object? receiverName = null,
     Object? receiverNumber = null,
   }) {
@@ -85,6 +88,10 @@ class _$FundTransferResponseModelCopyWithImpl<$Res,
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+      serviceChargeAmount: null == serviceChargeAmount
+          ? _value.serviceChargeAmount
+          : serviceChargeAmount // ignore: cast_nullable_to_non_nullable
               as double,
       receiverName: null == receiverName
           ? _value.receiverName
@@ -111,6 +118,7 @@ abstract class _$$FundTransferResponseModelImplCopyWith<$Res>
       {String status,
       String message,
       double amount,
+      double serviceChargeAmount,
       String receiverName,
       String receiverNumber});
 }
@@ -133,6 +141,7 @@ class __$$FundTransferResponseModelImplCopyWithImpl<$Res>
     Object? status = null,
     Object? message = null,
     Object? amount = null,
+    Object? serviceChargeAmount = null,
     Object? receiverName = null,
     Object? receiverNumber = null,
   }) {
@@ -148,6 +157,10 @@ class __$$FundTransferResponseModelImplCopyWithImpl<$Res>
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+      serviceChargeAmount: null == serviceChargeAmount
+          ? _value.serviceChargeAmount
+          : serviceChargeAmount // ignore: cast_nullable_to_non_nullable
               as double,
       receiverName: null == receiverName
           ? _value.receiverName
@@ -168,6 +181,7 @@ class _$FundTransferResponseModelImpl implements _FundTransferResponseModel {
       {required this.status,
       required this.message,
       required this.amount,
+      required this.serviceChargeAmount,
       required this.receiverName,
       required this.receiverNumber});
 
@@ -181,13 +195,15 @@ class _$FundTransferResponseModelImpl implements _FundTransferResponseModel {
   @override
   final double amount;
   @override
+  final double serviceChargeAmount;
+  @override
   final String receiverName;
   @override
   final String receiverNumber;
 
   @override
   String toString() {
-    return 'FundTransferResponseModel(status: $status, message: $message, amount: $amount, receiverName: $receiverName, receiverNumber: $receiverNumber)';
+    return 'FundTransferResponseModel(status: $status, message: $message, amount: $amount, serviceChargeAmount: $serviceChargeAmount, receiverName: $receiverName, receiverNumber: $receiverNumber)';
   }
 
   @override
@@ -198,6 +214,8 @@ class _$FundTransferResponseModelImpl implements _FundTransferResponseModel {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.serviceChargeAmount, serviceChargeAmount) ||
+                other.serviceChargeAmount == serviceChargeAmount) &&
             (identical(other.receiverName, receiverName) ||
                 other.receiverName == receiverName) &&
             (identical(other.receiverNumber, receiverNumber) ||
@@ -206,8 +224,8 @@ class _$FundTransferResponseModelImpl implements _FundTransferResponseModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, status, message, amount, receiverName, receiverNumber);
+  int get hashCode => Object.hash(runtimeType, status, message, amount,
+      serviceChargeAmount, receiverName, receiverNumber);
 
   /// Create a copy of FundTransferResponseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -231,6 +249,7 @@ abstract class _FundTransferResponseModel implements FundTransferResponseModel {
       {required final String status,
       required final String message,
       required final double amount,
+      required final double serviceChargeAmount,
       required final String receiverName,
       required final String receiverNumber}) = _$FundTransferResponseModelImpl;
 
@@ -243,6 +262,8 @@ abstract class _FundTransferResponseModel implements FundTransferResponseModel {
   String get message;
   @override
   double get amount;
+  @override
+  double get serviceChargeAmount;
   @override
   String get receiverName;
   @override

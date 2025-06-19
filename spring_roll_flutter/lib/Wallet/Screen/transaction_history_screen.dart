@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:spring_roll_flutter/Utils/constants/colors.dart';
 import 'package:spring_roll_flutter/Wallet/Provider/fetchTransactionHistory.dart';
 
 class TransactionHistoryPage extends ConsumerStatefulWidget {
@@ -80,9 +81,9 @@ class _TransactionHistoryPageState
         appBar: AppBar(
           title: const Text("Transaction History",
               style: TextStyle(color: Colors.white)),
-          backgroundColor: const Color(0xFFB04E6D),
+          backgroundColor: AppColors.primary,
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: AppColors.secondary,
         body: Column(
           children: [
             Container(
@@ -217,6 +218,20 @@ class _TransactionHistoryPageState
                                       ),
                                     ],
                                   ),
+                                  // Row(children: [
+                                  //   Text("Service Charge: ",
+                                  //       style: TextStyle(
+                                  //           fontSize: 14,
+                                  //           color:
+                                  //               Colors.white.withOpacity(0.6))),
+                                  //   Text(
+                                  //     transaction.serviceChargeAmount
+                                  //         .toString(),
+                                  //     style: TextStyle(
+                                  //         fontSize: 14,
+                                  //         color: Colors.white.withOpacity(0.6)),
+                                  //   ),
+                                  // ]),
                                   Row(
                                     children: [
                                       Text(

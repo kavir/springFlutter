@@ -4,9 +4,9 @@ ThemeData lightTheme() {
   return ThemeData(
     brightness: Brightness.light,
     primaryColor: Colors.blue,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: Color(0xFFE3feff),
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.blue,
+      backgroundColor: Color(0xFF324b4c),
       titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
     ),
     cardColor: Colors.white,

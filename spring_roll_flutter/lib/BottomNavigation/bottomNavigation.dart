@@ -185,7 +185,7 @@ class _NavigationMenuState extends ConsumerState<NavigationMenu>
       bottomNavigationBar: StylishBottomBar(
         currentIndex: _currentIndex,
         hasNotch: true,
-        backgroundColor: Color(0xFFB04E6D),
+        backgroundColor: Color(0xFF324b4c),
         notchStyle: NotchStyle.circle,
         option: AnimatedBarOptions(
           opacity: 0.3,
@@ -213,13 +213,13 @@ class _NavigationMenuState extends ConsumerState<NavigationMenu>
                 'POS',
                 style: TextStyle(fontWeight: FontWeight.w400),
               ),
-              selectedColor: AppColors.primary),
+              selectedColor: Colors.white),
           BottomBarItem(
             icon: const SizedBox(
               width: 30,
             ),
             title: const SizedBox.shrink(),
-            selectedColor: Colors.transparent,
+            selectedColor: Colors.white,
           ),
           BottomBarItem(
               icon: Image.asset(
@@ -231,7 +231,7 @@ class _NavigationMenuState extends ConsumerState<NavigationMenu>
                 'Expense',
                 style: TextStyle(fontWeight: FontWeight.w400),
               ),
-              selectedColor: AppColors.primary),
+              selectedColor: Colors.white),
           BottomBarItem(
               icon: Image.asset(
                 'assets/icons_figma/${_currentIndex == 4 ? 'animatedProfile.gif' : 'profileGrey.gif'}',
@@ -242,7 +242,7 @@ class _NavigationMenuState extends ConsumerState<NavigationMenu>
                 'Profile',
                 style: TextStyle(fontWeight: FontWeight.w400),
               ),
-              selectedColor: AppColors.primary),
+              selectedColor: Colors.white),
         ],
         onTap: onTabTapped,
       ),
@@ -257,7 +257,7 @@ class _NavigationMenuState extends ConsumerState<NavigationMenu>
                     )),
           );
         },
-        backgroundColor: Color(0xFFB04E6D),
+        backgroundColor: Color(0xFF324b4c),
         child: const Icon(
           Icons.camera_alt_outlined,
           color: Colors.white,

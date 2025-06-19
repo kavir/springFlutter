@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:spring_roll_flutter/Authentication/Provider/loginProvider.dart';
+import 'package:spring_roll_flutter/Utils/constants/colors.dart';
 import 'package:spring_roll_flutter/Utils/toast_utils.dart';
 import 'package:spring_roll_flutter/Wallet/Provider/fund_transfer_provider.dart';
 import 'package:spring_roll_flutter/Wallet/Model/fund_transfer_response_model.dart';
@@ -71,9 +72,9 @@ class _TransferFormState extends ConsumerState<TransferForm> {
     //   );
     // });
     return Scaffold(
-      backgroundColor: Colors.black, // Set background to black
+      backgroundColor: AppColors.secondary, // Set background to black
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(176, 78, 109, 1),
+        backgroundColor: AppColors.primary,
         title: Text(
           'Transfer Funds',
           style: TextStyle(color: Colors.white),
@@ -94,11 +95,11 @@ class _TransferFormState extends ConsumerState<TransferForm> {
                     controller: _receiverIdController,
                     decoration: InputDecoration(
                       labelText: 'Receiver Number',
-                      labelStyle:
-                          TextStyle(color: Colors.white), // White label text
+                      labelStyle: TextStyle(
+                          color: AppColors.primary), // White label text
                       border: OutlineInputBorder(),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: BorderSide(color: AppColors.primary),
                       ),
                     ),
                     keyboardType: TextInputType.number,
@@ -108,18 +109,18 @@ class _TransferFormState extends ConsumerState<TransferForm> {
                       }
                       return null;
                     },
-                    style: TextStyle(color: Colors.white), // White text
+                    style: TextStyle(color: AppColors.primary), // White text
                   ),
                   SizedBox(height: 16),
                   TextFormField(
                     controller: _amountController,
                     decoration: InputDecoration(
                       labelText: 'Amount',
-                      labelStyle:
-                          TextStyle(color: Colors.white), // White label text
+                      labelStyle: TextStyle(
+                          color: AppColors.primary), // White label text
                       border: OutlineInputBorder(),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: BorderSide(color: AppColors.primary),
                       ),
                     ),
                     keyboardType: TextInputType.number,
@@ -132,7 +133,7 @@ class _TransferFormState extends ConsumerState<TransferForm> {
                       }
                       return null;
                     },
-                    style: TextStyle(color: Colors.white), // White text
+                    style: TextStyle(color: AppColors.primary), // White text
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
@@ -179,8 +180,8 @@ class _TransferFormState extends ConsumerState<TransferForm> {
                     },
                     // onPressed: submitForm,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(
-                          176, 78, 109, 1), // Set button color to teal
+                      backgroundColor:
+                          AppColors.primary, // Set button color to teal
                       padding:
                           EdgeInsets.symmetric(vertical: 12, horizontal: 32),
                     ),
@@ -245,6 +246,8 @@ class _TransferFormState extends ConsumerState<TransferForm> {
               SizedBox(height: 12),
               _buildTransactionDetailRow('Amount:', '\NRP ${response.amount}'),
               _buildTransactionDetailRow(
+                  'Service Charge:', '\NRP ${response.serviceChargeAmount}'),
+              _buildTransactionDetailRow(
                   'Receiver Name:', response.receiverName),
               _buildTransactionDetailRow(
                   'Receiver Number:', response.receiverNumber),
@@ -262,7 +265,7 @@ class _TransferFormState extends ConsumerState<TransferForm> {
                   padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                 ),
                 child: Text('OK',
-                    style: TextStyle(fontSize: 16, color: Colors.white)),
+                    style: TextStyle(fontSize: 16, color: AppColors.primary)),
               ),
             ],
           ),
@@ -285,7 +288,7 @@ class _TransferFormState extends ConsumerState<TransferForm> {
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
-                color: Colors.white,
+                color: AppColors.primary,
               ),
             ),
           ),
@@ -294,7 +297,7 @@ class _TransferFormState extends ConsumerState<TransferForm> {
             flex: 5,
             child: Text(
               value,
-              style: TextStyle(color: Colors.white, fontSize: 16),
+              style: TextStyle(color: AppColors.primary, fontSize: 16),
               softWrap: true,
               maxLines: null, // Allows unlimited lines
               overflow: TextOverflow.visible,
@@ -304,21 +307,4 @@ class _TransferFormState extends ConsumerState<TransferForm> {
       ),
     );
   }
-
-  // Widget _buildTransactionDetailRow(String title, String value) {
-  //   return Padding(
-  //     padding: const EdgeInsets.symmetric(vertical: 6.0),
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //       children: [
-  //         Text(title,
-  //             style: TextStyle(
-  //                 fontWeight: FontWeight.w500,
-  //                 fontSize: 16,
-  //                 color: Colors.white)), // White text
-  //         Text(value, style: TextStyle(color: Colors.white, fontSize: 16)),
-  //       ],
-  //     ),
-  //   );
-  // }
 }

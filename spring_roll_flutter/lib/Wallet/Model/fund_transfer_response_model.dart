@@ -9,6 +9,7 @@ class FundTransferResponseModel with _$FundTransferResponseModel {
     required String status,
     required String message,
     required double amount,
+    required double serviceChargeAmount,
     required String receiverName,
     required String receiverNumber,
   }) = _FundTransferResponseModel;

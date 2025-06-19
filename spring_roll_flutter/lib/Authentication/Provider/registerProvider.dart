@@ -45,11 +45,15 @@ class RegisterProviderNotifier
         final jsonResponse = response.data;
         print("register vayo hae guys$jsonResponse");
         final registerResponse = registerResponseModel.fromJson(jsonResponse);
+        state = const AppState.loading(loading: false);
         state = AppState.success(data: registerResponse);
       } else {
+        state = const AppState.loading(loading: false);
+        state = const AppState.error();
         throw Exception('Failed to load employee details');
       }
     } catch (e) {
+      state = const AppState.loading(loading: false);
       state = const AppState.error();
     }
   }

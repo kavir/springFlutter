@@ -10,6 +10,7 @@ class TransactionModel with _$TransactionModel {
     required String senderName,
     required String receiverName,
     required double amount,
+    required double serviceChargeAmount,
     required String timestamp,
     required String status,
     required String transactionRole,

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:spring_roll_flutter/Utils/constants/colors.dart';
 import 'package:spring_roll_flutter/Utils/toast_utils.dart';
 import 'package:spring_roll_flutter/Wallet/Provider/fetchRewardPoints.dart';
 import 'package:spring_roll_flutter/Wallet/Provider/fund_transfer_provider.dart';
@@ -79,9 +80,9 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
     //   });
     // });
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: AppColors.secondary,
       appBar: AppBar(
-        backgroundColor: Color(0xFFB04E6D),
+        backgroundColor: AppColors.primary,
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Row(
@@ -89,8 +90,12 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
           children: [
             CircleAvatar(
               radius: 25,
-              backgroundColor: Color.fromARGB(255, 176, 78, 109),
-              child: Icon(Icons.account_circle, size: 35, color: Colors.white),
+              backgroundColor: AppColors.primary,
+              child: Icon(
+                Icons.account_circle,
+                size: 35,
+                color: AppColors.primary,
+              ),
             ),
             Row(
               children: [
@@ -153,7 +158,7 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
   Widget _buildBalanceSection() {
     return Container(
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 66, 66, 66),
+        color: const Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(12),
       ),
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -173,7 +178,7 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: AppColors.primary,
                     ),
                   ),
                   IconButton(
@@ -181,7 +186,7 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
                       _isBalanceVisible
                           ? Icons.visibility_off
                           : Icons.visibility,
-                      color: Colors.white,
+                      color: AppColors.primary,
                       size: 18,
                     ),
                     onPressed: () {
@@ -194,7 +199,10 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
               ),
               Text(
                 'Balance',
-                style: TextStyle(fontSize: 14, color: Colors.white),
+                style: TextStyle(
+                  fontSize: 14,
+                  color: AppColors.primary,
+                ),
               ),
             ],
           ),
@@ -204,17 +212,18 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
               Row(
                 children: [
                   Text(
-                    rewards, // Make sure this is a string like '5850.00'
+                    double.tryParse(rewards)?.toStringAsFixed(2) ??
+                        '0.00', // Make sure this is a string like '5850.00'
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: AppColors.primary,
                     ),
                   ),
                   SizedBox(width: 4),
                   Icon(
                     Icons.workspace_premium,
-                    color: Colors.white,
+                    color: AppColors.primary,
                     size: 18,
                   ),
                 ],
@@ -233,7 +242,7 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
   Widget _buildWalletOptions() {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF424242), // Black background
+        color: const Color(0xFFFFFFFF), // Black background
         borderRadius: BorderRadius.circular(12), // Rounded edges
       ),
       padding: EdgeInsets.all(4),
@@ -294,11 +303,16 @@ class _WalletHomePageState extends ConsumerState<WalletHomePage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 22, color: Colors.white), // Smaller icon
+          Icon(
+            icon,
+            size: 22,
+            color: AppColors.primary,
+          ), // Smaller icon
           SizedBox(height: 3), // Reduced spacing
           Text(
             label,
-            style: TextStyle(color: Colors.white, fontSize: 10), // Smaller text
+            style: TextStyle(
+                color: AppColors.primary, fontSize: 10), // Smaller text
             textAlign: TextAlign.center,
           ),
         ],

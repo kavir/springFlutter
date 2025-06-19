@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:spring_roll_flutter/Authentication/Provider/loginProvider.dart';
+import 'package:spring_roll_flutter/Utils/constants/colors.dart';
 import 'package:spring_roll_flutter/Wallet/Provider/editUserProfileProvider.dart';
 // import 'package:image_picker/image_picker.dart';
 
@@ -51,10 +52,12 @@ class _EditUserProfileScreenState extends ConsumerState<EditUserProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Edit User Profile",
-            style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color(0xFFB04E6D),
+            style: TextStyle(
+              color: Colors.white,
+            )),
+        backgroundColor: AppColors.primary,
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.secondary,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -79,11 +82,14 @@ class _EditUserProfileScreenState extends ConsumerState<EditUserProfileScreen> {
                   controller: _firstNameController,
                   decoration: InputDecoration(
                     labelText: 'First Name',
-                    labelStyle:
-                        TextStyle(color: Colors.white), // White label text
+                    labelStyle: TextStyle(
+                      color: AppColors.primary,
+                    ), // White label text
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: BorderSide(
+                        color: AppColors.primary,
+                      ),
                     ),
                   ),
                   // keyboardType: TextInputType.number,
@@ -93,18 +99,23 @@ class _EditUserProfileScreenState extends ConsumerState<EditUserProfileScreen> {
                   //   }
                   //   return null;
                   // },
-                  style: TextStyle(color: Colors.white), // White text
+                  style: TextStyle(
+                    color: AppColors.primary,
+                  ), // White text
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
                   controller: _lastNameController,
                   decoration: InputDecoration(
                     labelText: 'last Name',
-                    labelStyle:
-                        TextStyle(color: Colors.white), // White label text
+                    labelStyle: TextStyle(
+                      color: AppColors.primary,
+                    ), // White label text
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: BorderSide(
+                        color: AppColors.primary,
+                      ),
                     ),
                   ),
                   // validator: (value) {
@@ -113,18 +124,23 @@ class _EditUserProfileScreenState extends ConsumerState<EditUserProfileScreen> {
                   //   }
                   //   return null;
                   // },
-                  style: TextStyle(color: Colors.white), // White text
+                  style: TextStyle(
+                    color: AppColors.primary,
+                  ), // White text
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
                   controller: _phoneController,
                   decoration: InputDecoration(
                     labelText: 'Phone Number',
-                    labelStyle:
-                        TextStyle(color: Colors.white), // White label text
+                    labelStyle: TextStyle(
+                      color: AppColors.primary,
+                    ), // White label text
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: BorderSide(
+                        color: AppColors.primary,
+                      ),
                     ),
                   ),
                   keyboardType: TextInputType.number,
@@ -134,18 +150,22 @@ class _EditUserProfileScreenState extends ConsumerState<EditUserProfileScreen> {
                   //   }
                   //   return null;
                   // },
-                  style: TextStyle(color: Colors.white), // White text
+                  style: TextStyle(
+                    color: AppColors.primary,
+                  ), // White text
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: submitForm,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromRGBO(176, 78, 109, 1),
+                    backgroundColor: AppColors.primary,
                     padding: EdgeInsets.symmetric(vertical: 12, horizontal: 32),
                   ),
                   child: Text(
                     'Edit',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],

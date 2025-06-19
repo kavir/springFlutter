@@ -23,15 +23,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     ref.listen(loginProvider, (prev, next) {
       next.maybeWhen(
-        orElse: () {},
+        orElse: () {
+          print("orelse ma gayo___________");
+        },
         loading: (loading) {
           if (loading!) {
+            print("loading ma gayo___________");
             CustomLoadingIndicator().show(context);
           } else {
             CustomLoadingIndicator().hide();
           }
         },
         success: (data) {
+          print("sucess ma gayo___________");
           ToastUtils().showSuccessToast(context, data!.message);
           Navigator.pushReplacement(
             context,
@@ -41,6 +45,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           );
         },
         error: (e) {
+          print("error ma gayo___________$e");
+          print("Error______________: ${e!.message}");
           ToastUtils().showErrorToast(context, e!.message);
         },
       );

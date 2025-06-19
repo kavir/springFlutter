@@ -7,10 +7,10 @@ class AppColors {
   // static const Color primary = Color(0xFF3D50DF);
   static const Color primary = Color(0xFF324b4c);
   static const Color secondary = Color(0xFFE3feff);
+
   static const Color darkButtonPrimary = Color.fromARGB(255, 0, 0, 0);
   static const Color primaryTransparent = Color(0x803D50DF); // 50% opacity
   // static const Color primary = Color(0xFF186F65);
-
   static const Color accent = Color(0xFFb0c7ff);
   static const Color purpleLight = Color(0xFFE0E3FA);
 

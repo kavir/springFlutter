@@ -24,6 +24,7 @@ mixin _$TransactionModel {
   String get senderName => throw _privateConstructorUsedError;
   String get receiverName => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
+  double get serviceChargeAmount => throw _privateConstructorUsedError;
   String get timestamp => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get transactionRole => throw _privateConstructorUsedError;
@@ -50,6 +51,7 @@ abstract class $TransactionModelCopyWith<$Res> {
       String senderName,
       String receiverName,
       double amount,
+      double serviceChargeAmount,
       String timestamp,
       String status,
       String transactionRole,
@@ -75,6 +77,7 @@ class _$TransactionModelCopyWithImpl<$Res, $Val extends TransactionModel>
     Object? senderName = null,
     Object? receiverName = null,
     Object? amount = null,
+    Object? serviceChargeAmount = null,
     Object? timestamp = null,
     Object? status = null,
     Object? transactionRole = null,
@@ -96,6 +99,10 @@ class _$TransactionModelCopyWithImpl<$Res, $Val extends TransactionModel>
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+      serviceChargeAmount: null == serviceChargeAmount
+          ? _value.serviceChargeAmount
+          : serviceChargeAmount // ignore: cast_nullable_to_non_nullable
               as double,
       timestamp: null == timestamp
           ? _value.timestamp
@@ -130,6 +137,7 @@ abstract class _$$TransactionModelImplCopyWith<$Res>
       String senderName,
       String receiverName,
       double amount,
+      double serviceChargeAmount,
       String timestamp,
       String status,
       String transactionRole,
@@ -153,6 +161,7 @@ class __$$TransactionModelImplCopyWithImpl<$Res>
     Object? senderName = null,
     Object? receiverName = null,
     Object? amount = null,
+    Object? serviceChargeAmount = null,
     Object? timestamp = null,
     Object? status = null,
     Object? transactionRole = null,
@@ -174,6 +183,10 @@ class __$$TransactionModelImplCopyWithImpl<$Res>
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+      serviceChargeAmount: null == serviceChargeAmount
+          ? _value.serviceChargeAmount
+          : serviceChargeAmount // ignore: cast_nullable_to_non_nullable
               as double,
       timestamp: null == timestamp
           ? _value.timestamp
@@ -203,6 +216,7 @@ class _$TransactionModelImpl implements _TransactionModel {
       required this.senderName,
       required this.receiverName,
       required this.amount,
+      required this.serviceChargeAmount,
       required this.timestamp,
       required this.status,
       required this.transactionRole,
@@ -220,6 +234,8 @@ class _$TransactionModelImpl implements _TransactionModel {
   @override
   final double amount;
   @override
+  final double serviceChargeAmount;
+  @override
   final String timestamp;
   @override
   final String status;
@@ -230,7 +246,7 @@ class _$TransactionModelImpl implements _TransactionModel {
 
   @override
   String toString() {
-    return 'TransactionModel(id: $id, senderName: $senderName, receiverName: $receiverName, amount: $amount, timestamp: $timestamp, status: $status, transactionRole: $transactionRole, phoneNumber: $phoneNumber)';
+    return 'TransactionModel(id: $id, senderName: $senderName, receiverName: $receiverName, amount: $amount, serviceChargeAmount: $serviceChargeAmount, timestamp: $timestamp, status: $status, transactionRole: $transactionRole, phoneNumber: $phoneNumber)';
   }
 
   @override
@@ -244,6 +260,8 @@ class _$TransactionModelImpl implements _TransactionModel {
             (identical(other.receiverName, receiverName) ||
                 other.receiverName == receiverName) &&
             (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.serviceChargeAmount, serviceChargeAmount) ||
+                other.serviceChargeAmount == serviceChargeAmount) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.status, status) || other.status == status) &&
@@ -255,8 +273,17 @@ class _$TransactionModelImpl implements _TransactionModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, senderName, receiverName,
-      amount, timestamp, status, transactionRole, phoneNumber);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      senderName,
+      receiverName,
+      amount,
+      serviceChargeAmount,
+      timestamp,
+      status,
+      transactionRole,
+      phoneNumber);
 
   /// Create a copy of TransactionModel
   /// with the given fields replaced by the non-null parameter values.
@@ -281,6 +308,7 @@ abstract class _TransactionModel implements TransactionModel {
       required final String senderName,
       required final String receiverName,
       required final double amount,
+      required final double serviceChargeAmount,
       required final String timestamp,
       required final String status,
       required final String transactionRole,
@@ -297,6 +325,8 @@ abstract class _TransactionModel implements TransactionModel {
   String get receiverName;
   @override
   double get amount;
+  @override
+  double get serviceChargeAmount;
   @override
   String get timestamp;
   @override

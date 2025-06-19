@@ -45,11 +45,15 @@ class LoginProviderNotifier
         ref.read(phoneNumberProvider.notifier).state = number;
         // ref.read(tokenProvider.notifier).storeToken(jsonResponse.toString());
         print("login vayo hae guys$jsonResponse");
+        state = const AppState.loading(loading: false);
         state = AppState.success(data: loginResponse);
       } else {
+        state = const AppState.loading(loading: false);
+        state = const AppState.error();
         throw Exception('Failed to load employee details');
       }
     } catch (e) {
+      state = const AppState.loading(loading: false);
       state = const AppState.error();
     }
   }
