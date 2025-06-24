@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:spring_roll_flutter/Utils/constants/colors.dart';
-import 'package:spring_roll_flutter/Wallet/Provider/indv_user_dashBoard_info_provider.dart';
-import 'package:spring_roll_flutter/Wallet/Screen/qrScannerPage.dart';
-import 'package:spring_roll_flutter/Wallet/Screen/wallet_home_screen.dart';
+import 'package:spring_roll_flutter/features/Wallet/Provider/indv_user_dashBoard_info_provider.dart';
+import 'package:spring_roll_flutter/features/Wallet/Screen/qrScannerPage.dart';
+import 'package:spring_roll_flutter/features/Wallet/Screen/wallet_home_screen.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 final loggedOutProvider = StateProvider<bool>((ref) => false);
@@ -70,7 +70,31 @@ class _NavigationMenuState extends ConsumerState<NavigationMenu>
             orElse: () {
               return const Text("orelse");
             },
-            loginError: (errorMessage) => Text(errorMessage ?? ""),
+            generalError: (errorMessage) => Text(errorMessage ?? ""),
+            // loading: (loading) => Center(
+            //   child: LoadingAnimationWidget.dotsTriangle(
+            //     color: AppColors.primary,
+            //     size: 50,
+            //   ),
+            // ),
+            success: (UserDetail) {
+              final warehouseProductDetails = UserDetail;
+
+              return WalletHomePage();
+            },
+            error: (error) =>
+                Center(child: Text("Failed to load respective screens $error")),
+          );
+        },
+      ),
+      Builder(
+        builder: (context) {
+          final asyncWarehouseData = ref.watch(indvDahsboardInfoProvider);
+          return asyncWarehouseData.maybeWhen(
+            orElse: () {
+              return const Text("orelse");
+            },
+            generalError: (errorMessage) => Text(errorMessage ?? ""),
             // loading: (loading) => Center(
             //   child: LoadingAnimationWidget.dotsTriangle(
             //     color: AppColors.primary,
@@ -94,7 +118,7 @@ class _NavigationMenuState extends ConsumerState<NavigationMenu>
             orElse: () {
               return const Text("orelse");
             },
-            loginError: (errorMessage) => Text(errorMessage ?? ""),
+            generalError: (errorMessage) => Text(errorMessage ?? ""),
             // loading: (loading) => Center(
             //   child: LoadingAnimationWidget.dotsTriangle(
             //     color: AppColors.primary,
@@ -118,7 +142,7 @@ class _NavigationMenuState extends ConsumerState<NavigationMenu>
             orElse: () {
               return const Text("orelse");
             },
-            loginError: (errorMessage) => Text(errorMessage ?? ""),
+            generalError: (errorMessage) => Text(errorMessage ?? ""),
             // loading: (loading) => Center(
             //   child: LoadingAnimationWidget.dotsTriangle(
             //     color: AppColors.primary,
@@ -142,31 +166,7 @@ class _NavigationMenuState extends ConsumerState<NavigationMenu>
             orElse: () {
               return const Text("orelse");
             },
-            loginError: (errorMessage) => Text(errorMessage ?? ""),
-            // loading: (loading) => Center(
-            //   child: LoadingAnimationWidget.dotsTriangle(
-            //     color: AppColors.primary,
-            //     size: 50,
-            //   ),
-            // ),
-            success: (UserDetail) {
-              final warehouseProductDetails = UserDetail;
-
-              return WalletHomePage();
-            },
-            error: (error) =>
-                Center(child: Text("Failed to load POS products: $error")),
-          );
-        },
-      ),
-      Builder(
-        builder: (context) {
-          final asyncWarehouseData = ref.watch(indvDahsboardInfoProvider);
-          return asyncWarehouseData.maybeWhen(
-            orElse: () {
-              return const Text("orelse");
-            },
-            loginError: (errorMessage) => Text(errorMessage ?? ""),
+            generalError: (errorMessage) => Text(errorMessage ?? ""),
             success: (UserDetail) {
               final warehouseProductDetails = UserDetail;
 

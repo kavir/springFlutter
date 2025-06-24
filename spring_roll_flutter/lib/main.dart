@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spring_roll_flutter/Authentication/Screen/loginScreen.dart';
-import 'package:spring_roll_flutter/BottomNavigation/bottomNavigation.dart';
-import 'package:spring_roll_flutter/Wallet/Screen/wallet_home_screen.dart';
-import 'package:spring_roll_flutter/employee/Screen/fetch_data.dart';
+import 'package:spring_roll_flutter/features/Authentication/Screen/loginScreen.dart';
+import 'package:spring_roll_flutter/features/Splash/SplashScreen.dart/splashScreen.dart';
+
 
 void main() {
   runApp(ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  //  bool _isInitialized = false;
+
+  // void _onInitializationComplete() {
+  //   setState(() {
+  //     _isInitialized = true;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +32,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
 
-      home: LoginScreen(),
-      // home: EmployeeApp(),
+      home: SplashScreen(),
+      // home: LoginScreen(),
     );
   }
 }

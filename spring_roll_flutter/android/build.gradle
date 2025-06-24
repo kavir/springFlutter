@@ -1,14 +1,14 @@
 
-// buildscript {
-//     repositories {
-//         google()  // Google's repository for AGP
-//         mavenCentral()
-//     }
-//     dependencies {
-//         // Specify the version of AGP you're using (e.g., 8.2.1)
-//         classpath 'com.android.tools.build:gradle:8.2.1'
-//     }
-// }
+buildscript {
+    repositories {
+        google()  // Google's repository for AGP
+        mavenCentral()
+    }
+    dependencies {
+        // Upgrade AGP to 8.2.2 (latest stable)
+        classpath 'com.android.tools.build:gradle:8.2.2'
+    }
+}
 
 allprojects {
     repositories {

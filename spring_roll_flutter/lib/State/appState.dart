@@ -7,5 +7,5 @@ class AppState<T> with _$AppState<T> {
   const factory AppState.loading({bool? loading}) = Loading;
   const factory AppState.success({T? data}) = Success<T>;
   const factory AppState.error({T? data}) = Error<T>;
-  const factory AppState.loginError({String? errorMessage}) = LoginError;
+  const factory AppState.generalError({String? errorMessage}) = LoginError;
 }

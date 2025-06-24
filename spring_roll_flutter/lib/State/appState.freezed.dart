@@ -22,7 +22,7 @@ mixin _$AppState<T> {
     required TResult Function(bool? loading) loading,
     required TResult Function(T? data) success,
     required TResult Function(T? data) error,
-    required TResult Function(String? errorMessage) loginError,
+    required TResult Function(String? errorMessage) generalError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,7 +31,7 @@ mixin _$AppState<T> {
     TResult? Function(bool? loading)? loading,
     TResult? Function(T? data)? success,
     TResult? Function(T? data)? error,
-    TResult? Function(String? errorMessage)? loginError,
+    TResult? Function(String? errorMessage)? generalError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +40,7 @@ mixin _$AppState<T> {
     TResult Function(bool? loading)? loading,
     TResult Function(T? data)? success,
     TResult Function(T? data)? error,
-    TResult Function(String? errorMessage)? loginError,
+    TResult Function(String? errorMessage)? generalError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ mixin _$AppState<T> {
     required TResult Function(Loading<T> value) loading,
     required TResult Function(Success<T> value) success,
     required TResult Function(Error<T> value) error,
-    required TResult Function(LoginError<T> value) loginError,
+    required TResult Function(LoginError<T> value) generalError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,7 +59,7 @@ mixin _$AppState<T> {
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(Success<T> value)? success,
     TResult? Function(Error<T> value)? error,
-    TResult? Function(LoginError<T> value)? loginError,
+    TResult? Function(LoginError<T> value)? generalError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,7 +68,7 @@ mixin _$AppState<T> {
     TResult Function(Loading<T> value)? loading,
     TResult Function(Success<T> value)? success,
     TResult Function(Error<T> value)? error,
-    TResult Function(LoginError<T> value)? loginError,
+    TResult Function(LoginError<T> value)? generalError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -140,7 +140,7 @@ class _$InitialImpl<T> implements Initial<T> {
     required TResult Function(bool? loading) loading,
     required TResult Function(T? data) success,
     required TResult Function(T? data) error,
-    required TResult Function(String? errorMessage) loginError,
+    required TResult Function(String? errorMessage) generalError,
   }) {
     return initial();
   }
@@ -152,7 +152,7 @@ class _$InitialImpl<T> implements Initial<T> {
     TResult? Function(bool? loading)? loading,
     TResult? Function(T? data)? success,
     TResult? Function(T? data)? error,
-    TResult? Function(String? errorMessage)? loginError,
+    TResult? Function(String? errorMessage)? generalError,
   }) {
     return initial?.call();
   }
@@ -164,7 +164,7 @@ class _$InitialImpl<T> implements Initial<T> {
     TResult Function(bool? loading)? loading,
     TResult Function(T? data)? success,
     TResult Function(T? data)? error,
-    TResult Function(String? errorMessage)? loginError,
+    TResult Function(String? errorMessage)? generalError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -180,7 +180,7 @@ class _$InitialImpl<T> implements Initial<T> {
     required TResult Function(Loading<T> value) loading,
     required TResult Function(Success<T> value) success,
     required TResult Function(Error<T> value) error,
-    required TResult Function(LoginError<T> value) loginError,
+    required TResult Function(LoginError<T> value) generalError,
   }) {
     return initial(this);
   }
@@ -192,7 +192,7 @@ class _$InitialImpl<T> implements Initial<T> {
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(Success<T> value)? success,
     TResult? Function(Error<T> value)? error,
-    TResult? Function(LoginError<T> value)? loginError,
+    TResult? Function(LoginError<T> value)? generalError,
   }) {
     return initial?.call(this);
   }
@@ -204,7 +204,7 @@ class _$InitialImpl<T> implements Initial<T> {
     TResult Function(Loading<T> value)? loading,
     TResult Function(Success<T> value)? success,
     TResult Function(Error<T> value)? error,
-    TResult Function(LoginError<T> value)? loginError,
+    TResult Function(LoginError<T> value)? generalError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -290,7 +290,7 @@ class _$LoadingImpl<T> implements Loading<T> {
     required TResult Function(bool? loading) loading,
     required TResult Function(T? data) success,
     required TResult Function(T? data) error,
-    required TResult Function(String? errorMessage) loginError,
+    required TResult Function(String? errorMessage) generalError,
   }) {
     return loading(this.loading);
   }
@@ -302,7 +302,7 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult? Function(bool? loading)? loading,
     TResult? Function(T? data)? success,
     TResult? Function(T? data)? error,
-    TResult? Function(String? errorMessage)? loginError,
+    TResult? Function(String? errorMessage)? generalError,
   }) {
     return loading?.call(this.loading);
   }
@@ -314,7 +314,7 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult Function(bool? loading)? loading,
     TResult Function(T? data)? success,
     TResult Function(T? data)? error,
-    TResult Function(String? errorMessage)? loginError,
+    TResult Function(String? errorMessage)? generalError,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -330,7 +330,7 @@ class _$LoadingImpl<T> implements Loading<T> {
     required TResult Function(Loading<T> value) loading,
     required TResult Function(Success<T> value) success,
     required TResult Function(Error<T> value) error,
-    required TResult Function(LoginError<T> value) loginError,
+    required TResult Function(LoginError<T> value) generalError,
   }) {
     return loading(this);
   }
@@ -342,7 +342,7 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(Success<T> value)? success,
     TResult? Function(Error<T> value)? error,
-    TResult? Function(LoginError<T> value)? loginError,
+    TResult? Function(LoginError<T> value)? generalError,
   }) {
     return loading?.call(this);
   }
@@ -354,7 +354,7 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult Function(Loading<T> value)? loading,
     TResult Function(Success<T> value)? success,
     TResult Function(Error<T> value)? error,
-    TResult Function(LoginError<T> value)? loginError,
+    TResult Function(LoginError<T> value)? generalError,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -449,7 +449,7 @@ class _$SuccessImpl<T> implements Success<T> {
     required TResult Function(bool? loading) loading,
     required TResult Function(T? data) success,
     required TResult Function(T? data) error,
-    required TResult Function(String? errorMessage) loginError,
+    required TResult Function(String? errorMessage) generalError,
   }) {
     return success(data);
   }
@@ -461,7 +461,7 @@ class _$SuccessImpl<T> implements Success<T> {
     TResult? Function(bool? loading)? loading,
     TResult? Function(T? data)? success,
     TResult? Function(T? data)? error,
-    TResult? Function(String? errorMessage)? loginError,
+    TResult? Function(String? errorMessage)? generalError,
   }) {
     return success?.call(data);
   }
@@ -473,7 +473,7 @@ class _$SuccessImpl<T> implements Success<T> {
     TResult Function(bool? loading)? loading,
     TResult Function(T? data)? success,
     TResult Function(T? data)? error,
-    TResult Function(String? errorMessage)? loginError,
+    TResult Function(String? errorMessage)? generalError,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -489,7 +489,7 @@ class _$SuccessImpl<T> implements Success<T> {
     required TResult Function(Loading<T> value) loading,
     required TResult Function(Success<T> value) success,
     required TResult Function(Error<T> value) error,
-    required TResult Function(LoginError<T> value) loginError,
+    required TResult Function(LoginError<T> value) generalError,
   }) {
     return success(this);
   }
@@ -501,7 +501,7 @@ class _$SuccessImpl<T> implements Success<T> {
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(Success<T> value)? success,
     TResult? Function(Error<T> value)? error,
-    TResult? Function(LoginError<T> value)? loginError,
+    TResult? Function(LoginError<T> value)? generalError,
   }) {
     return success?.call(this);
   }
@@ -513,7 +513,7 @@ class _$SuccessImpl<T> implements Success<T> {
     TResult Function(Loading<T> value)? loading,
     TResult Function(Success<T> value)? success,
     TResult Function(Error<T> value)? error,
-    TResult Function(LoginError<T> value)? loginError,
+    TResult Function(LoginError<T> value)? generalError,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -608,7 +608,7 @@ class _$ErrorImpl<T> implements Error<T> {
     required TResult Function(bool? loading) loading,
     required TResult Function(T? data) success,
     required TResult Function(T? data) error,
-    required TResult Function(String? errorMessage) loginError,
+    required TResult Function(String? errorMessage) generalError,
   }) {
     return error(data);
   }
@@ -620,7 +620,7 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult? Function(bool? loading)? loading,
     TResult? Function(T? data)? success,
     TResult? Function(T? data)? error,
-    TResult? Function(String? errorMessage)? loginError,
+    TResult? Function(String? errorMessage)? generalError,
   }) {
     return error?.call(data);
   }
@@ -632,7 +632,7 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult Function(bool? loading)? loading,
     TResult Function(T? data)? success,
     TResult Function(T? data)? error,
-    TResult Function(String? errorMessage)? loginError,
+    TResult Function(String? errorMessage)? generalError,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -648,7 +648,7 @@ class _$ErrorImpl<T> implements Error<T> {
     required TResult Function(Loading<T> value) loading,
     required TResult Function(Success<T> value) success,
     required TResult Function(Error<T> value) error,
-    required TResult Function(LoginError<T> value) loginError,
+    required TResult Function(LoginError<T> value) generalError,
   }) {
     return error(this);
   }
@@ -660,7 +660,7 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(Success<T> value)? success,
     TResult? Function(Error<T> value)? error,
-    TResult? Function(LoginError<T> value)? loginError,
+    TResult? Function(LoginError<T> value)? generalError,
   }) {
     return error?.call(this);
   }
@@ -672,7 +672,7 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult Function(Loading<T> value)? loading,
     TResult Function(Success<T> value)? success,
     TResult Function(Error<T> value)? error,
-    TResult Function(LoginError<T> value)? loginError,
+    TResult Function(LoginError<T> value)? generalError,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -737,7 +737,7 @@ class _$LoginErrorImpl<T> implements LoginError<T> {
 
   @override
   String toString() {
-    return 'AppState<$T>.loginError(errorMessage: $errorMessage)';
+    return 'AppState<$T>.generalError(errorMessage: $errorMessage)';
   }
 
   @override
@@ -767,9 +767,9 @@ class _$LoginErrorImpl<T> implements LoginError<T> {
     required TResult Function(bool? loading) loading,
     required TResult Function(T? data) success,
     required TResult Function(T? data) error,
-    required TResult Function(String? errorMessage) loginError,
+    required TResult Function(String? errorMessage) generalError,
   }) {
-    return loginError(errorMessage);
+    return generalError(errorMessage);
   }
 
   @override
@@ -779,9 +779,9 @@ class _$LoginErrorImpl<T> implements LoginError<T> {
     TResult? Function(bool? loading)? loading,
     TResult? Function(T? data)? success,
     TResult? Function(T? data)? error,
-    TResult? Function(String? errorMessage)? loginError,
+    TResult? Function(String? errorMessage)? generalError,
   }) {
-    return loginError?.call(errorMessage);
+    return generalError?.call(errorMessage);
   }
 
   @override
@@ -791,11 +791,11 @@ class _$LoginErrorImpl<T> implements LoginError<T> {
     TResult Function(bool? loading)? loading,
     TResult Function(T? data)? success,
     TResult Function(T? data)? error,
-    TResult Function(String? errorMessage)? loginError,
+    TResult Function(String? errorMessage)? generalError,
     required TResult orElse(),
   }) {
-    if (loginError != null) {
-      return loginError(errorMessage);
+    if (generalError != null) {
+      return generalError(errorMessage);
     }
     return orElse();
   }
@@ -807,9 +807,9 @@ class _$LoginErrorImpl<T> implements LoginError<T> {
     required TResult Function(Loading<T> value) loading,
     required TResult Function(Success<T> value) success,
     required TResult Function(Error<T> value) error,
-    required TResult Function(LoginError<T> value) loginError,
+    required TResult Function(LoginError<T> value) generalError,
   }) {
-    return loginError(this);
+    return generalError(this);
   }
 
   @override
@@ -819,9 +819,9 @@ class _$LoginErrorImpl<T> implements LoginError<T> {
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(Success<T> value)? success,
     TResult? Function(Error<T> value)? error,
-    TResult? Function(LoginError<T> value)? loginError,
+    TResult? Function(LoginError<T> value)? generalError,
   }) {
-    return loginError?.call(this);
+    return generalError?.call(this);
   }
 
   @override
@@ -831,11 +831,11 @@ class _$LoginErrorImpl<T> implements LoginError<T> {
     TResult Function(Loading<T> value)? loading,
     TResult Function(Success<T> value)? success,
     TResult Function(Error<T> value)? error,
-    TResult Function(LoginError<T> value)? loginError,
+    TResult Function(LoginError<T> value)? generalError,
     required TResult orElse(),
   }) {
-    if (loginError != null) {
-      return loginError(this);
+    if (generalError != null) {
+      return generalError(this);
     }
     return orElse();
   }
